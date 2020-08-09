@@ -1,0 +1,17 @@
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(121, 121, 121);
+  padding: 10px 20px;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+}
+
+.headerlogo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}

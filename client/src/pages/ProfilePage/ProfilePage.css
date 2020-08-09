@@ -1,0 +1,32 @@
+.profile-page {
+  margin: 0 auto;
+}
+
+.profile-page h2 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.profile-page__info {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.profile-posts {
+  margin: 30px auto 0;
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.posts-amount {
+  font-size: 1.3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.posts-amount span {
+  font-weight: bold;
+}

@@ -1,0 +1,14 @@
+.post {
+  cursor: pointer;
+  margin: 20px;
+}
+
+.post img {
+  height: 450px;
+  width: 300px;
+}
+
+.post .placeholder {
+  height: 450px;
+  width: 300px;
+}

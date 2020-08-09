@@ -1,0 +1,166 @@
+/* Указываем box sizing *, */
+*: : before,
+  *: : after {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  padding-top: 100px;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  background-color: rgb(65, 65, 170);
+  color: white;
+  font-size: 1.3rem;
+  padding: 5px 10px;
+  border: none;
+  box-shadow: 0 0 5px black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  background-color: rgb(197, 195, 195);
+  color: rgb(112, 112, 112);
+}
+
+.toast {
+  padding: 10px 20px;
+  margin-top: 100px;
+  background-color: black;
+  color: white;
+  font-size: 1.2rem;
+  width: fit-content;
+  position: fixed;
+  right: 50px;
+  top: 200px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+::placeholder {
+  color: white;
+}
+
+input {
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 1px solid black;
+  margin: 10px;
+  padding: 5px;
+  background-color: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 2px solid #ffeb3b;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+input:focus + label {
+  color: #ffeb3b;
+}
+
+.placeholder {
+  position: relative;
+  width: 100%;
+
+  background-color: darkseagreen;
+}
+
+.placeholder img {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}

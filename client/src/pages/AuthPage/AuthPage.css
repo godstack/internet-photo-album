@@ -1,0 +1,25 @@
+.form-container {
+  width: 500px;
+  margin: 200px auto;
+  padding: 20px 60px;
+  background-color: rgb(53, 53, 211);
+  box-shadow: 0 0 15px black;
+  border-radius: 10px;
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btn-login {
+  background-color: chocolate;
+  color: white;
+}
+
+.btn-register {
+  background-color: rgb(146, 145, 145);
+  color: black;
+}

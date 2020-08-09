@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+}
+
+.nav__item {
+  padding: 10px 15px;
+  font-size: 1.3rem;
+  border-left: 1px solid #bbb;
+}
+
+.nav__item:first-child {
+  border: none;
+}
+
+.nav__item:hover {
+  background-color: rgb(34, 162, 194);
+  border-radius: 4px;
+  color: white;
+}
