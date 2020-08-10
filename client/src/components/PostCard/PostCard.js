@@ -17,6 +17,10 @@ export const PostCard = props => {
 
   const { request, loading, error, clearError } = useHttp();
 
+  const base64data = Buffer.from(post.postImage.data, 'binary').toString(
+    'base64'
+  );
+
   useEffect(() => {
     message(error);
 
@@ -27,14 +31,6 @@ export const PostCard = props => {
 
     clearError();
   }, [message, clearError, error]);
-
-  const [isLiked, setIsLiked] = useState(
-    !!post.likes.find(el => el === auth.userId)
-  );
-
-  const base64data = Buffer.from(post.postImage.data, 'binary').toString(
-    'base64'
-  );
 
   const handleLikePost = async () => {
     const data = await request(
@@ -47,8 +43,6 @@ export const PostCard = props => {
     );
 
     setPost(data);
-
-    setIsLiked(!!data.likes.find(el => el === auth.userId));
   };
 
   return (
@@ -64,7 +58,7 @@ export const PostCard = props => {
             className='post-card__like'
             disabled={loading}
           >
-            {isLiked ? (
+            {!!post.likes.find(el => el === auth.userId) ? (
               <i class='fas fa-heart'></i>
             ) : (
               <i className='far fa-heart'></i>
