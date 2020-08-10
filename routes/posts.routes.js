@@ -42,6 +42,35 @@ router.post('/upload', auth, async (req, res) => {
   }
 });
 
+// /api/post/like
+
+router.put('/like', auth, async (req, res) => {
+  try {
+    const { userId } = req.user;
+
+    const { postId } = req.body;
+
+    const post = await Post.findById(postId);
+
+    const isUserLiked = post.likes.find(el => el.equals(userId));
+
+    if (isUserLiked) {
+      const newLikesArr = post.likes.filter(el => !el.equals(userId));
+      post.likes = newLikesArr;
+    } else {
+      post.likes.push(userId);
+    }
+
+    await post.save();
+
+    res.json(post);
+  } catch (e) {
+    res
+      .status(500)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
 // get all user posts
 router.get('/', auth, async (req, res) => {
   try {
