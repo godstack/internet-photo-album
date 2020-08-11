@@ -7,9 +7,7 @@ export const Post = props => {
 
   const history = useHistory();
 
-  const base64data = Buffer.from(post.postImage.data, 'binary').toString(
-    'base64'
-  );
+  const base64data = Buffer.from(post.photo.data, 'binary').toString('base64');
 
   const redirectToPostPage = () => {
     history.push(`/post/${post._id}`);

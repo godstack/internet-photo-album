@@ -17,16 +17,14 @@ export const PostCard = props => {
 
   const { request, loading, error, clearError } = useHttp();
 
-  const base64data = Buffer.from(post.postImage.data, 'binary').toString(
-    'base64'
-  );
+  const base64data = Buffer.from(post.photo.data, 'binary').toString('base64');
 
   useEffect(() => {
     message(error);
 
     if (error?.toLowerCase() === 'no authorization') {
       auth.logout();
-      history.push('/');
+      history.push('/login');
     }
 
     clearError();

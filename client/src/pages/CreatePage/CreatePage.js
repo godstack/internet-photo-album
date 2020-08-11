@@ -8,7 +8,7 @@ import { Loader } from '../../components/Loader/Loader';
 import imageCompression from 'browser-image-compression';
 
 export const CreatePage = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [form, setForm] = useState({ file: null });
   const auth = useContext(AuthContext);
   const history = useHistory();
   const message = useMessage();
@@ -21,23 +21,27 @@ export const CreatePage = () => {
 
     if (error?.toLowerCase() === 'no authorization') {
       auth.logout();
-      history.push('/');
+      history.push('/login');
     }
 
     clearError();
   }, [message, clearError, error]);
 
-  const fileSelectedHandler = e => {
-    setSelectedFile(e.target.files[0]);
+  const handleChange = e => {
+    const { name, value, files } = e.target;
+
+    name === 'file'
+      ? setForm({ ...form, [name]: files[0] })
+      : setForm({ ...form, [name]: value });
   };
 
-  const fileUploadHandler = async () => {
-    if (selectedFile) {
+  const uploadHandler = async () => {
+    if (form.file) {
       try {
         setLoading(true);
         const fd = new FormData();
 
-        console.log(`originalFile size ${selectedFile.size / 1024 / 1024} MB`);
+        console.log(`originalFile size ${form.file.size / 1024 / 1024} MB`);
 
         const options = {
           maxSizeMB: 0.05,
@@ -45,13 +49,13 @@ export const CreatePage = () => {
           useWebWorker: true
         };
 
-        const compressedFile = await imageCompression(selectedFile, options);
+        const compressedFile = await imageCompression(form.file, options);
 
         console.log(
           `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
         ); // smaller than maxSizeMB
 
-        fd.append('image', compressedFile, selectedFile.name);
+        fd.append('image', compressedFile, form.file.name);
 
         const data = await request(
           '/api/post/upload',
@@ -87,16 +91,16 @@ export const CreatePage = () => {
           <div className='input-field'>
             <input
               type='file'
-              onChange={fileSelectedHandler}
-              name='postImage'
+              onChange={handleChange}
+              name='file'
               accept='image/*'
             />
-            <label htmlFor='selectedFile'>Upload photos</label>
+            <label htmlFor='file'>Upload photo</label>
           </div>
 
           <button
             className='btn btn-add'
-            onClick={fileUploadHandler}
+            onClick={uploadHandler}
             disabled={loading}
           >
             Upload

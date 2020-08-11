@@ -28,8 +28,8 @@ router.post('/upload', auth, async (req, res) => {
     }
 
     const post = new Post({
-      owner: req.user.userId,
-      postImage: file
+      postedBy: req.user.userId,
+      photo: file
     });
 
     await post.save();
@@ -74,7 +74,7 @@ router.put('/like', auth, async (req, res) => {
 // get all user posts
 router.get('/', auth, async (req, res) => {
   try {
-    const posts = await Post.find({ owner: req.user.userId });
+    const posts = await Post.find({ postedBy: req.user.userId });
 
     res.json(posts);
   } catch (e) {

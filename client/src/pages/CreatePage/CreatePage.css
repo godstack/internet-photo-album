@@ -1,17 +1,19 @@
 .create-post {
-  width: fit-content;
-  margin: 150px auto;
+  width: 500px;
+  margin: 100px auto 0;
   padding: 20px 60px;
-  background-color: rgb(20, 96, 167);
-  justify-content: space-evenly;
-  display: flex;
-  align-items: center;
+  background-color: rgb(53, 53, 211);
   box-shadow: 0 0 15px black;
   border-radius: 10px;
 }
 
 .btn-add {
   background-color: rgb(34, 167, 22);
+  margin: 0 auto;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .create-page-header {

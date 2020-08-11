@@ -8,7 +8,7 @@ router.get('/profile', auth, async (req, res) => {
   try {
     const { userId } = req.user;
 
-    const posts = await Post.find({ owner: userId });
+    const posts = await Post.find({ postedBy: userId });
 
     res.json(posts);
   } catch (e) {

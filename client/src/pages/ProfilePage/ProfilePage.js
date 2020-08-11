@@ -51,7 +51,7 @@ export const ProfilePage = props => {
 
     if (error?.toLowerCase() === 'no authorization') {
       auth.logout();
-      history.push('/');
+      history.push('/login');
     }
 
     clearError();

@@ -24,7 +24,7 @@ export const PostPage = () => {
 
     if (error?.toLowerCase() === 'no authorization') {
       auth.logout();
-      history.push('/');
+      history.push('/login');
     }
 
     clearError();

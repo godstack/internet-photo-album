@@ -1,6 +1,6 @@
 .form-container {
   width: 500px;
-  margin: 200px auto;
+  margin: 100px auto 0;
   padding: 20px 60px;
   background-color: rgb(53, 53, 211);
   box-shadow: 0 0 15px black;
@@ -22,4 +22,16 @@
 .btn-register {
   background-color: rgb(146, 145, 145);
   color: black;
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 20px;
+
+  font-size: 1.2rem;
+  text-decoration: underline;
+}
+
+.form-link a {
+  color: greenyellow;
 }

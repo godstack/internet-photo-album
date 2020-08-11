@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { AuthPage } from './pages/AuthPage/AuthPage';
+import { LoginPage } from './pages/AuthPages/LoginPage';
+import { RegisterPage } from './pages/AuthPages/RegisterPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { CreatePage } from './pages/CreatePage/CreatePage';
 import { PostPage } from './pages/PostPage/PostPage';
@@ -20,8 +21,9 @@ export const useRoutes = isAuthenticated => {
 
   return (
     <Switch>
-      <Route exact path='/' component={AuthPage} />
-      <Redirect to='/' />
+      <Route exact path='/login' component={LoginPage} />
+      <Route exact path='/register' component={RegisterPage} />
+      <Redirect to='/login' />
     </Switch>
   );
 };

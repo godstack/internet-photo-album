@@ -1,10 +1,13 @@
 const { model, Schema, Types } = require('mongoose');
 
 const schema = new Schema({
+  description: {
+    type: String
+  },
   likes: [{ type: Types.ObjectId, ref: 'User' }],
-  postImage: { type: Buffer, required: true },
+  photo: { type: Buffer, required: true },
   date: { type: Date, default: Date.now },
-  owner: { type: Types.ObjectId, ref: 'User' }
+  postedBy: { type: Types.ObjectId, ref: 'User' }
 });
 
 module.exports = model('Post', schema);

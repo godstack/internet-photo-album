@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, oneOf } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
@@ -11,10 +11,18 @@ const router = Router();
 router.post(
   '/register',
   [
-    check('email', 'Wrong email').isEmail(),
-    check('password', 'Password should be longer, than 6 characters').isLength({
-      min: 6
-    })
+    check('email').isEmail().withMessage('Wrong email'),
+    check('nickname', 'Wrong nickname')
+      .exists()
+      .withMessage('nickname is required')
+      .isLength({ min: 3, max: 15 })
+      .withMessage('wrong nickname length (From 3 to 15 characters)'),
+
+    check('password')
+      .isLength({
+        min: 6
+      })
+      .withMessage('Password should be longer, than 6 characters')
   ],
   async (req, res) => {
     try {
@@ -26,19 +34,26 @@ router.post(
           .json({ errors: errors.array(), message: 'Wrong registration data' });
       }
 
-      const { email, password } = req.body;
+      const { email, password, nickname } = req.body;
 
-      const candidate = await User.findOne({ email });
+      const candidateEmail = await User.findOne({ email });
+      const candidateNickname = await User.findOne({ nickname });
 
-      if (candidate) {
+      if (candidateEmail) {
         return res
           .status(400)
           .json({ message: 'User already exists, use another email' });
       }
 
+      if (candidateNickname) {
+        return res
+          .status(400)
+          .json({ message: 'User already exists, use another nickname' });
+      }
+
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const user = new User({ email, password: hashedPassword });
+      const user = new User({ email, nickname, password: hashedPassword });
 
       await user.save();
 
@@ -53,7 +68,19 @@ router.post(
 router.post(
   '/login',
   [
-    check('email', 'Wrong email').normalizeEmail().isEmail(),
+    oneOf([
+      check('email')
+        .exists()
+        .withMessage('email is required')
+        .normalizeEmail()
+        .isEmail(),
+      check('email', 'Wrong nickname')
+        .exists()
+        .withMessage('nickname is required')
+        .isLength({ min: 3 })
+        .withMessage('wrong nickname length')
+    ]),
+
     check('password', 'Enter correct password').exists()
   ],
   async (req, res) => {
@@ -68,7 +95,13 @@ router.post(
 
       const { email, password } = req.body;
 
-      const user = await User.findOne({ email });
+      const regexForEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      const isEmail = regexForEmail.test(email);
+
+      const user = isEmail
+        ? await User.findOne({ email })
+        : await User.findOne({ nickname: email });
 
       if (!user) {
         return res.status(400).json({ message: 'Such user does not exist' });
