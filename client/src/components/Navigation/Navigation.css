@@ -6,6 +6,7 @@
   padding: 10px 15px;
   font-size: 1.3rem;
   border-left: 1px solid #bbb;
+  cursor: pointer;
 }
 
 .nav__item:first-child {
@@ -16,4 +17,44 @@
   background-color: rgb(34, 162, 194);
   border-radius: 4px;
   color: white;
+}
+
+.topmenu {
+  position: relative;
+}
+
+.topmenu:hover .submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu__item:hover {
+  background-color: rgb(9, 139, 139);
+  border-radius: 4px;
+  color: white;
+}
+
+.submenu__item {
+  padding: 5px;
+}
+
+.submenu {
+  border: 1px dashed black;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  right: 0;
+  width: 150px;
+  z-index: 10;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+a:visited {
+  color: black;
 }

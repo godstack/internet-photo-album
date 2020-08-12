@@ -3,47 +3,40 @@ import { useHttp } from '../../hooks/http.hook';
 import { Loader } from '../../components/Loader/Loader';
 import { AuthContext } from '../../context/AuthContext';
 import { useMessage } from '../../hooks/useMessage';
+import imageCompression from 'browser-image-compression';
+import { Post } from '../../components/Post/Post';
+import { useParams, useHistory } from 'react-router-dom';
 
 import './ProfilePage.css';
-import { Post } from '../../components/Post/Post';
-import { useHistory } from 'react-router-dom';
+import { FileInput } from '../../components/FileInput/FileInput';
 
 export const ProfilePage = props => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
+  const [user, setUser] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const { nickname } = useParams();
+
   const message = useMessage();
   const history = useHistory();
-  const { loading, request, error, clearError } = useHttp();
+  const { request, error, clearError, loading } = useHttp();
+
   const auth = useContext(AuthContext);
 
-  const getProfilePosts = async () => {
-    const fetchedPosts = await request('/api/user/profile', 'GET', null, {
+  const fetchInfo = async () => {
+    const data = await request(`/api/user/profile/${nickname}`, 'GET', null, {
       authorization: `Bearer ${auth.token}`
     });
 
-    setPosts(fetchedPosts);
-  };
-
-  const showPosts = () => {
-    if (!posts.length) {
-      return (
-        <p className='profile-posts__empty'>Tou didn't add any post yet</p>
-      );
+    if (data?.user?.profilePhoto) {
+      data.user.profilePhoto = Buffer.from(
+        data.user.profilePhoto,
+        'binary'
+      ).toString('base64');
     }
 
-    return (
-      <>
-        <div className='profile-page__info'>
-          <div className='posts-amount'>
-            <span>{posts.length}</span> Posts
-          </div>
-        </div>
-        <div className='profile-posts'>
-          {posts.map(post => (
-            <Post post={post} key={post._id} />
-          ))}
-        </div>
-      </>
-    );
+    setPosts(data.posts);
+    setUser(data.user);
   };
 
   useEffect(() => {
@@ -58,20 +51,49 @@ export const ProfilePage = props => {
   }, [message, error, clearError]);
 
   useEffect(() => {
-    getProfilePosts();
+    fetchInfo();
   }, []);
 
   if (loading) {
     return <Loader />;
   }
 
+  if (!user) {
+    return <h2 className='profile-no-user'>Such user does not exist</h2>;
+  }
+
   return (
     <div className='profile-page'>
-      <h2>
-        <i className='far fa-id-badge'></i> Profile
-      </h2>
+      <header className='profile-page__header'>
+        <div className='profile-image-wrapper'>
+          {user.profilePhoto ? (
+            <img
+              className='profile-image'
+              src={`data:image/jpeg;base64,${user.profilePhoto}`}
+              alt='profile-photo'
+            />
+          ) : (
+            <p>No profile photo</p>
+          )}
+        </div>
 
-      {showPosts()}
+        <section className='profile-info'>
+          <div>
+            <h2 className='profile-info__nickname'>{user?.nickname}</h2>
+          </div>
+          <ul className='profile-info__amount'>
+            <li>{posts?.length} posts</li>
+            <li className='clickable'>{user?.followers?.length} followers</li>
+            <li className='clickable'>{user?.following?.length} following</li>
+          </ul>
+        </section>
+      </header>
+
+      <div className='profile-posts'>
+        {posts.map(post => (
+          <Post post={post} key={post._id} />
+        ))}
+      </div>
     </div>
   );
 };

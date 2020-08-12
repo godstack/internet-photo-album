@@ -1,0 +1,54 @@
+.file-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: center;
+}
+
+.grey-input .form-group {
+  padding: 1em;
+  margin: 1em;
+}
+.grey-input input[type='file'] {
+  outline: 0;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.grey-input .label {
+  width: 165px;
+  height: 165px;
+  border: 2px dashed grey;
+  border-radius: 50%;
+  display: block;
+  padding: 1.2em;
+  transition: border 300ms ease;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.grey-input .label i {
+  display: block;
+  font-size: 30px;
+  padding-bottom: 16px;
+}
+.grey-input .label i,
+.grey-input .label .title {
+  color: grey;
+  transition: 200ms color;
+}
+.grey-input .label:hover {
+  border: 2px solid #000;
+}
+.grey-input .label:hover i,
+.grey-input .label:hover .title {
+  color: #000;
+}
+
+.selected-file-name {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}

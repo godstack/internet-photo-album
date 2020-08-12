@@ -7,6 +7,7 @@ import { useMessage } from '../../hooks/useMessage';
 import { Loader } from '../../components/Loader/Loader';
 
 import imageCompression from 'browser-image-compression';
+import { FileInput } from '../../components/FileInput/FileInput';
 
 export const CreatePage = () => {
   const [form, setForm] = useState({ file: null });
@@ -90,23 +91,13 @@ export const CreatePage = () => {
           <i className='far fa-images'></i> Add new post
         </h2>
         <div className='create-post'>
-          <div className='input-field'>
-            <input
-              type='file'
-              onChange={handleChange}
-              name='file'
-              accept='image/*'
-            />
-            <label htmlFor='file'>Upload photo</label>
-          </div>
-
-          <button
-            className='btn btn-add'
-            onClick={uploadHandler}
-            disabled={loading}
-          >
-            Upload
-          </button>
+          <FileInput
+            loading={loading}
+            uploadHandler={uploadHandler}
+            handleChange={handleChange}
+            title={'Select post photo'}
+            filename={form?.file?.name || "You haven't selected a file yet"}
+          />
         </div>
       </div>
     </>

@@ -5,7 +5,10 @@ const schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   posts: [{ type: Types.ObjectId, ref: 'Post' }],
-  likedPosts: [{ type: Types.ObjectId, ref: 'Post' }]
+  likedPosts: [{ type: Types.ObjectId, ref: 'Post' }],
+  followers: [{ type: Types.ObjectId, ref: 'User' }],
+  following: [{ type: Types.ObjectId, ref: 'User' }],
+  profilePhoto: { type: Buffer }
 });
 
 module.exports = model('User', schema);

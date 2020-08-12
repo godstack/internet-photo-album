@@ -10,11 +10,11 @@ export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
     return (
       <Switch>
-        <Route exact path='/profile' component={ProfilePage} />
-        <Route exact path='/add' component={CreatePage} />
+        <Route exact path='/user/:nickname' component={ProfilePage} />
+        <Route exact path='/addpost' component={CreatePage} />
         <Route exact path='/post/:postId' component={PostPage} />
 
-        <Redirect to='/profile' />
+        <Redirect to='/addpost' />
       </Switch>
     );
   }
