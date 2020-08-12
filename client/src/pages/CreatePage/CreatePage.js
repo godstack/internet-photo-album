@@ -5,10 +5,12 @@ import { useHistory } from 'react-router-dom';
 import './CreatePage.css';
 import { useMessage } from '../../hooks/useMessage';
 import { Loader } from '../../components/Loader/Loader';
+
 import imageCompression from 'browser-image-compression';
 
 export const CreatePage = () => {
   const [form, setForm] = useState({ file: null });
+
   const auth = useContext(AuthContext);
   const history = useHistory();
   const message = useMessage();
@@ -27,7 +29,7 @@ export const CreatePage = () => {
     clearError();
   }, [message, clearError, error]);
 
-  const handleChange = e => {
+  const handleChange = async e => {
     const { name, value, files } = e.target;
 
     name === 'file'
@@ -45,7 +47,7 @@ export const CreatePage = () => {
 
         const options = {
           maxSizeMB: 0.05,
-          maxWidthOrHeight: 1920,
+          maxWidthOrHeight: 500,
           useWebWorker: true
         };
 

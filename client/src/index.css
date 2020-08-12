@@ -152,15 +152,7 @@ input:focus + label {
 }
 
 .placeholder {
-  position: relative;
   width: 100%;
 
-  background-color: darkseagreen;
-}
-
-.placeholder img {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
+  background-color: inherit;
 }
