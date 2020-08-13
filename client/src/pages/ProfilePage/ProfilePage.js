@@ -3,17 +3,16 @@ import { useHttp } from '../../hooks/http.hook';
 import { Loader } from '../../components/Loader/Loader';
 import { AuthContext } from '../../context/AuthContext';
 import { useMessage } from '../../hooks/useMessage';
-import imageCompression from 'browser-image-compression';
+import classNames from 'classnames';
+
 import { Post } from '../../components/Post/Post';
 import { useParams, useHistory } from 'react-router-dom';
 
 import './ProfilePage.css';
-import { FileInput } from '../../components/FileInput/FileInput';
 
 export const ProfilePage = props => {
   const [posts, setPosts] = useState(null);
   const [user, setUser] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const { nickname } = useParams();
 
@@ -22,6 +21,33 @@ export const ProfilePage = props => {
   const { request, error, clearError, loading } = useHttp();
 
   const auth = useContext(AuthContext);
+
+  const handleFollow = async () => {
+    const data = await request(`/api/user/follow/${nickname}`, 'POST', null, {
+      authorization: `Bearer ${auth.token}`
+    });
+
+    setUser({ ...user, followers: data.followers });
+  };
+
+  const showFollowButton = () => {
+    if (auth.nickname !== nickname) {
+      const isFollowing = !!user.followers.find(el => el === auth.nickname);
+
+      return (
+        <button
+          className={classNames(
+            'profile-info__follow-btn',
+            'btn',
+            isFollowing ? 'btn-unfollow' : 'btn-follow'
+          )}
+          onClick={handleFollow}
+        >
+          {isFollowing ? 'Unfollow' : 'Follow'}
+        </button>
+      );
+    }
+  };
 
   const fetchInfo = async () => {
     const data = await request(`/api/user/profile/${nickname}`, 'GET', null, {
@@ -78,8 +104,9 @@ export const ProfilePage = props => {
         </div>
 
         <section className='profile-info'>
-          <div>
+          <div className='profile-info__wrapper-1'>
             <h2 className='profile-info__nickname'>{user?.nickname}</h2>
+            {showFollowButton()}
           </div>
           <ul className='profile-info__amount'>
             <li>{posts?.length} posts</li>

@@ -32,7 +32,11 @@ export const Navigation = () => {
           <NavLink to='/settings' className='submenu__item'>
             <i class='fas fa-cog'></i> Settings
           </NavLink>
-          <NavLink to='/' onClick={logoutHandler} className='submenu__item'>
+          <NavLink
+            to='/'
+            onClick={logoutHandler}
+            className='submenu__item logout__item'
+          >
             <i className='fas fa-sign-out-alt'></i> Logout
           </NavLink>
         </div>

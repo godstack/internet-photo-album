@@ -31,15 +31,11 @@ export const PostPage = () => {
   }, [error, message, clearError]);
 
   const getPost = useCallback(async () => {
-    try {
-      const fetched = await request(`/api/post/${postId}`, 'GET', null, {
-        authorization: `Bearer ${token}`
-      });
+    const fetched = await request(`/api/post/${postId}`, 'GET', null, {
+      authorization: `Bearer ${token}`
+    });
 
-      setPost(fetched);
-    } catch (e) {
-      message(e);
-    }
+    setPost(fetched);
   }, [token, postId, request]);
 
   useEffect(() => {

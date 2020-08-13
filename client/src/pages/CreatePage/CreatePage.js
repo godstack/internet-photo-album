@@ -40,43 +40,39 @@ export const CreatePage = () => {
 
   const uploadHandler = async () => {
     if (form.file) {
-      try {
-        setLoading(true);
-        const fd = new FormData();
+      setLoading(true);
+      const fd = new FormData();
 
-        console.log(`originalFile size ${form.file.size / 1024 / 1024} MB`);
+      console.log(`originalFile size ${form.file.size / 1024 / 1024} MB`);
 
-        const options = {
-          maxSizeMB: 0.05,
-          maxWidthOrHeight: 500,
-          useWebWorker: true
-        };
+      const options = {
+        maxSizeMB: 0.05,
+        maxWidthOrHeight: 500,
+        useWebWorker: true
+      };
 
-        const compressedFile = await imageCompression(form.file, options);
+      const compressedFile = await imageCompression(form.file, options);
 
-        console.log(
-          `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-        ); // smaller than maxSizeMB
+      console.log(
+        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+      ); // smaller than maxSizeMB
 
-        fd.append('image', compressedFile, form.file.name);
+      fd.append('image', compressedFile, form.file.name);
 
-        const data = await request(
-          '/api/post/upload',
-          'POST',
-          fd,
-          {
-            authorization: `Bearer ${auth.token}`
-          },
-          false
-        );
+      const data = await request(
+        '/api/post/upload',
+        'POST',
+        fd,
+        {
+          authorization: `Bearer ${auth.token}`
+        },
+        false
+      );
 
-        setLoading(false);
+      setLoading(false);
 
-        if (data._id) {
-          history.push(`/post/${data._id}`);
-        }
-      } catch (error) {
-        message(error);
+      if (data._id) {
+        history.push(`/post/${data._id}`);
       }
     } else {
       message('Select an image!');

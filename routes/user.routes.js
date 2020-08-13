@@ -55,4 +55,40 @@ router.put('/profile/avatar', auth, async (req, res) => {
   }
 });
 
+router.post('/follow/:nickname', auth, async (req, res) => {
+  try {
+    const authorizedUser = await User.findById(req.user.userId);
+
+    const aimUser = await User.findOne({ nickname: req.params.nickname });
+
+    const isFollowed = !!aimUser.followers.find(
+      el => el === authorizedUser.nickname
+    );
+
+    if (isFollowed) {
+      const newFollowersArr = aimUser.followers.filter(
+        el => el !== authorizedUser.nickname
+      );
+      aimUser.followers = newFollowersArr;
+      const newFollowingArr = authorizedUser.following.filter(
+        el => el !== aimUser.nickname
+      );
+      authorizedUser.following = newFollowingArr;
+    } else {
+      aimUser.followers.push(authorizedUser.nickname);
+      authorizedUser.following.push(aimUser.nickname);
+    }
+
+    await aimUser.save();
+
+    await authorizedUser.save();
+
+    res.json({ followers: aimUser.followers });
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
 module.exports = router;

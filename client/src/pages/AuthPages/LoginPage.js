@@ -28,11 +28,9 @@ export const LoginPage = () => {
   };
 
   const loginHandler = async () => {
-    try {
-      const data = await request('/api/auth/login', 'POST', { ...form });
+    const data = await request('/api/auth/login', 'POST', { ...form });
 
-      auth.login(data.token, data.userId, data.nickname);
-    } catch (e) {}
+    auth.login(data.token, data.userId, data.nickname);
   };
 
   return (
