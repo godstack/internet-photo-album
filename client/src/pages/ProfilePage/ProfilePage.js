@@ -6,7 +6,7 @@ import { useMessage } from '../../hooks/useMessage';
 import classNames from 'classnames';
 
 import { Post } from '../../components/Post/Post';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, NavLink } from 'react-router-dom';
 
 import './ProfilePage.css';
 
@@ -31,8 +31,11 @@ export const ProfilePage = props => {
   };
 
   const showFollowButton = () => {
+    debugger;
     if (auth.nickname !== nickname) {
-      const isFollowing = !!user.followers.find(el => el === auth.nickname);
+      const isFollowing = !!user.followers.find(
+        el => el.nickname === auth.nickname
+      );
 
       return (
         <button
@@ -110,8 +113,22 @@ export const ProfilePage = props => {
           </div>
           <ul className='profile-info__amount'>
             <li>{posts?.length} posts</li>
-            <li className='clickable'>{user?.followers?.length} followers</li>
-            <li className='clickable'>{user?.following?.length} following</li>
+            <li>
+              <NavLink
+                to={`/user/${nickname}/followers`}
+                style={{ color: 'black' }}
+              >
+                {user?.followers?.length} followers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={`/user/${nickname}/following`}
+                style={{ color: 'black' }}
+              >
+                {user?.following?.length} following
+              </NavLink>
+            </li>
           </ul>
         </section>
       </header>

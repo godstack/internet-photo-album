@@ -5,16 +5,27 @@ import { RegisterPage } from './pages/AuthPages/RegisterPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { CreatePage } from './pages/CreatePage/CreatePage';
 import { PostPage } from './pages/PostPage/PostPage';
+import { UserListPage } from './pages/UserListPage/UserListPage';
 
-export const useRoutes = isAuthenticated => {
+export const useRoutes = (isAuthenticated, nickname) => {
   if (isAuthenticated) {
     return (
       <Switch>
         <Route exact path='/user/:nickname' component={ProfilePage} />
         <Route exact path='/addpost' component={CreatePage} />
         <Route exact path='/post/:postId' component={PostPage} />
+        <Route
+          exact
+          path='/user/:nickname/followers'
+          component={UserListPage}
+        />
+        <Route
+          exact
+          path='/user/:nickname/following'
+          component={UserListPage}
+        />
 
-        <Redirect to='/addpost' />
+        <Redirect to={`/user/${nickname}`} />
       </Switch>
     );
   }

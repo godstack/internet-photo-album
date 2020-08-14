@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { useMessage } from '../../hooks/useMessage';
-import { AuthContext } from '../../context/AuthContext';
+
 import { Loader } from '../../components/Loader/Loader';
 import './AuthPages.css';
 
@@ -11,16 +11,16 @@ export const RegisterPage = () => {
   const [form, setForm] = useState({ email: '', password: '', nickname: '' });
   const { loading, request, error, clearError } = useHttp();
   const history = useHistory();
-  const auth = useContext(AuthContext);
 
   const message = useMessage();
 
   const registerHandler = async () => {
     const data = await request('/api/auth/register', 'POST', { ...form });
 
-    if (!error) {
+    if (data.message === 'New user was created') {
       history.push('/login');
     }
+
     message(data.message);
   };
 

@@ -62,21 +62,27 @@ router.post('/follow/:nickname', auth, async (req, res) => {
     const aimUser = await User.findOne({ nickname: req.params.nickname });
 
     const isFollowed = !!aimUser.followers.find(
-      el => el === authorizedUser.nickname
+      el => el.nickname === authorizedUser.nickname
     );
 
     if (isFollowed) {
       const newFollowersArr = aimUser.followers.filter(
-        el => el !== authorizedUser.nickname
+        el => el.nickname !== authorizedUser.nickname
       );
       aimUser.followers = newFollowersArr;
       const newFollowingArr = authorizedUser.following.filter(
-        el => el !== aimUser.nickname
+        el => el.nickname !== aimUser.nickname
       );
       authorizedUser.following = newFollowingArr;
     } else {
-      aimUser.followers.push(authorizedUser.nickname);
-      authorizedUser.following.push(aimUser.nickname);
+      aimUser.followers.push({
+        nickname: authorizedUser.nickname,
+        profilePhoto: authorizedUser.profilePhoto
+      });
+      authorizedUser.following.push({
+        nickname: aimUser.nickname,
+        profilePhoto: aimUser.profilePhoto
+      });
     }
 
     await aimUser.save();
@@ -84,6 +90,34 @@ router.post('/follow/:nickname', auth, async (req, res) => {
     await authorizedUser.save();
 
     res.json({ followers: aimUser.followers });
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
+router.get('/:nickname/followers', auth, async (req, res) => {
+  try {
+    const { nickname } = req.params;
+
+    const user = await User.findOne({ nickname });
+
+    res.json({ userList: user.followers });
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
+router.get('/:nickname/following', auth, async (req, res) => {
+  try {
+    const { nickname } = req.params;
+
+    const user = await User.findOne({ nickname });
+
+    res.json({ userList: user.following });
   } catch (e) {
     res
       .status(400)

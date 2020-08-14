@@ -13,7 +13,7 @@ function App() {
   const { login, logout, token, userId, ready, nickname } = useAuth();
   const isAuthenticated = !!token;
 
-  const routes = useRoutes(isAuthenticated);
+  const routes = useRoutes(isAuthenticated, nickname);
 
   if (!ready) {
     return <Loader />;

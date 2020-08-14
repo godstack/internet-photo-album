@@ -6,8 +6,8 @@ const schema = new Schema({
   password: { type: String, required: true },
   posts: [{ type: Types.ObjectId, ref: 'Post' }],
   likedPosts: [{ type: Types.ObjectId, ref: 'Post' }],
-  followers: [{ type: String, ref: 'User' }],
-  following: [{ type: String, ref: 'User' }],
+  followers: [{ type: Object }],
+  following: [{ type: Object }],
   profilePhoto: { type: Buffer }
 });
 
