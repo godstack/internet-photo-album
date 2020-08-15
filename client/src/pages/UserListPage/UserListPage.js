@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Loader } from '../../components/Loader/Loader';
 import './UserListPage.css';
 import { useMessage } from '../../hooks/useMessage';
+import { UserItem } from '../../components/UserItem/UserItem';
 
 export const UserListPage = () => {
   const { nickname } = useParams();
@@ -19,13 +20,12 @@ export const UserListPage = () => {
   const history = useHistory();
 
   const fetchUserList = async () => {
-    debugger;
     const data = await request(
       `/api/user/${nickname}/${userListType}`,
       'GET',
       null,
       {
-        authorization: `Bearer ${auth.token}`
+        authorization: `Bearer ${auth.user.token}`
       }
     );
 
@@ -54,13 +54,14 @@ export const UserListPage = () => {
   }
 
   return (
-    <div className='userlist'>
-      <header className='userlist__header'>{userListType}</header>
-      <div className='userlist__list'>
-        {userList?.map(user => (
-          // <UserItem user={user} />
-          <p>{user.nickname}</p>
-        ))}
+    <div className='user-list-wrapper'>
+      <div className='userlist'>
+        <header className='userlist__header'>{userListType}</header>
+        <div className='userlist__list'>
+          {userList?.map(user => (
+            <UserItem user={user} />
+          ))}
+        </div>
       </div>
     </div>
   );

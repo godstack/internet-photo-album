@@ -30,7 +30,7 @@ export const LoginPage = () => {
   const loginHandler = async () => {
     const data = await request('/api/auth/login', 'POST', { ...form });
 
-    auth.login(data.token, data.userId, data.nickname);
+    auth.login({ ...data });
   };
 
   return (

@@ -21,7 +21,7 @@ export const Navigation = () => {
       <div className='nav__item topmenu'>
         <i className='fas fa-user-circle'></i>
         <div className='submenu'>
-          <NavLink to={`/user/${auth.nickname}`} className='submenu__item'>
+          <NavLink to={`/user/${auth.user.nickname}`} className='submenu__item'>
             <i className='far fa-id-card'></i> Profile
           </NavLink>
           <NavLink to='/addpost' className='submenu__item'>

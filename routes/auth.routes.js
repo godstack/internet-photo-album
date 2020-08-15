@@ -121,7 +121,12 @@ router.post(
         { expiresIn: '1h' }
       );
 
-      res.json({ token, userId: user.id, nickname: user.nickname });
+      res.json({
+        token,
+        userId: user.id,
+        nickname: user.nickname,
+        following: user.following
+      });
     } catch (e) {
       res.status(500).json({ message: 'Something went wrong, try again' });
     }

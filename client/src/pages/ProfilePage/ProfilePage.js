@@ -24,17 +24,17 @@ export const ProfilePage = props => {
 
   const handleFollow = async () => {
     const data = await request(`/api/user/follow/${nickname}`, 'POST', null, {
-      authorization: `Bearer ${auth.token}`
+      authorization: `Bearer ${auth.user.token}`
     });
 
-    setUser({ ...user, followers: data.followers });
+    setUser({ ...user, followers: data.followersAim });
+    auth.login({ ...auth.user, following: data.followingAuth });
   };
 
   const showFollowButton = () => {
-    debugger;
-    if (auth.nickname !== nickname) {
+    if (auth.user.nickname !== nickname) {
       const isFollowing = !!user.followers.find(
-        el => el.nickname === auth.nickname
+        el => el.nickname === auth.user.nickname
       );
 
       return (
@@ -54,7 +54,7 @@ export const ProfilePage = props => {
 
   const fetchInfo = async () => {
     const data = await request(`/api/user/profile/${nickname}`, 'GET', null, {
-      authorization: `Bearer ${auth.token}`
+      authorization: `Bearer ${auth.user.token}`
     });
 
     if (data?.user?.profilePhoto) {
@@ -81,7 +81,7 @@ export const ProfilePage = props => {
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+  }, [window.location.href]);
 
   if (loading) {
     return <Loader />;

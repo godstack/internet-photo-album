@@ -89,7 +89,10 @@ router.post('/follow/:nickname', auth, async (req, res) => {
 
     await authorizedUser.save();
 
-    res.json({ followers: aimUser.followers });
+    res.json({
+      followersAim: aimUser.followers,
+      followingAuth: authorizedUser.following
+    });
   } catch (e) {
     res
       .status(400)
