@@ -18,6 +18,9 @@ export const Navigation = () => {
       <NavLink to='/' className='nav__item'>
         <i className='fas fa-home'></i>
       </NavLink>
+      <NavLink to='/users' className='nav__item'>
+        <i className='fas fa-users'></i>
+      </NavLink>
       <div className='nav__item topmenu'>
         <i className='fas fa-user-circle'></i>
         <div className='submenu'>

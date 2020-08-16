@@ -28,7 +28,7 @@ export const CreatePage = () => {
     }
 
     clearError();
-  }, [message, clearError, error]);
+  }, [message, clearError, error, auth, history]);
 
   const handleChange = async e => {
     const { name, value, files } = e.target;
@@ -64,7 +64,7 @@ export const CreatePage = () => {
         'POST',
         fd,
         {
-          authorization: `Bearer ${auth.token}`
+          authorization: `Bearer ${auth.user.token}`
         },
         false
       );

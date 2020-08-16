@@ -22,6 +22,8 @@ app.use('/api/post/', require('./routes/posts.routes'));
 
 app.use('/api/user/', require('./routes/user.routes'));
 
+app.use('/api/users/', require('./routes/users.routes'));
+
 async function start() {
   try {
     await mongoose.connect(config.get('mongoUri'), {

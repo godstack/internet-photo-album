@@ -14,16 +14,15 @@ export const useRoutes = (isAuthenticated, nickname) => {
         <Route exact path='/user/:nickname' component={ProfilePage} />
         <Route exact path='/addpost' component={CreatePage} />
         <Route exact path='/post/:postId' component={PostPage} />
-        <Route
-          exact
-          path='/user/:nickname/followers'
-          component={UserListPage}
-        />
-        <Route
-          exact
-          path='/user/:nickname/following'
-          component={UserListPage}
-        />
+        <Route exact path='/user/:nickname/followers'>
+          <UserListPage userListType={'followers'} />
+        </Route>
+        <Route exact path='/user/:nickname/following'>
+          <UserListPage userListType={'following'} />
+        </Route>
+        <Route exact path='/users'>
+          <UserListPage userListType={'all users'} />
+        </Route>
 
         <Redirect to={`/user/${nickname}`} />
       </Switch>

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useCallback } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { Loader } from '../../components/Loader/Loader';
 import { AuthContext } from '../../context/AuthContext';
@@ -52,7 +52,7 @@ export const ProfilePage = props => {
     }
   };
 
-  const fetchInfo = async () => {
+  const fetchInfo = useCallback(async () => {
     const data = await request(`/api/user/profile/${nickname}`, 'GET', null, {
       authorization: `Bearer ${auth.user.token}`
     });
@@ -66,7 +66,7 @@ export const ProfilePage = props => {
 
     setPosts(data.posts);
     setUser(data.user);
-  };
+  }, [auth.user.token, nickname, request]);
 
   useEffect(() => {
     message(error);
@@ -77,11 +77,11 @@ export const ProfilePage = props => {
     }
 
     clearError();
-  }, [message, error, clearError]);
+  }, [message, error, clearError, auth, history]);
 
   useEffect(() => {
     fetchInfo();
-  }, [window.location.href]);
+  }, [fetchInfo]);
 
   if (loading) {
     return <Loader />;
@@ -99,7 +99,7 @@ export const ProfilePage = props => {
             <img
               className='profile-image'
               src={`data:image/jpeg;base64,${user.profilePhoto}`}
-              alt='profile-photo'
+              alt='profile'
             />
           ) : (
             <p>No profile photo</p>

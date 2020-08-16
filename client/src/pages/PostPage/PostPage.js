@@ -28,7 +28,7 @@ export const PostPage = () => {
     }
 
     clearError();
-  }, [error, message, clearError]);
+  }, [error, message, clearError, auth, history]);
 
   const getPost = useCallback(async () => {
     const fetched = await request(`/api/post/${postId}`, 'GET', null, {

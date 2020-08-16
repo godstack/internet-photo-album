@@ -10,11 +10,11 @@ export const FileInput = ({
 }) => {
   return (
     <div className='file-input'>
-      <div class='grey-input'>
-        <div class='form-group'>
-          <label class='label'>
-            <i class='fas fa-paperclip'></i>
-            <span class='title'>{title}</span>
+      <div className='grey-input'>
+        <div className='form-group'>
+          <label className='label'>
+            <i className='fas fa-paperclip'></i>
+            <span className='title'>{title}</span>
             <input
               type='file'
               onChange={handleChange}

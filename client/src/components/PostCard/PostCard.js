@@ -28,7 +28,7 @@ export const PostCard = props => {
     }
 
     clearError();
-  }, [message, clearError, error]);
+  }, [message, clearError, error, auth, history]);
 
   const handleLikePost = async () => {
     const data = await request(
@@ -36,7 +36,7 @@ export const PostCard = props => {
       'PUT',
       { postId: post._id },
       {
-        authorization: `Bearer ${auth.token}`
+        authorization: `Bearer ${auth.user.token}`
       }
     );
 
@@ -56,8 +56,8 @@ export const PostCard = props => {
             className='post-card__like'
             disabled={loading}
           >
-            {!!post.likes.find(el => el === auth.userId) ? (
-              <i class='fas fa-heart'></i>
+            {!!post.likes.find(el => el === auth.user.userId) ? (
+              <i className='fas fa-heart'></i>
             ) : (
               <i className='far fa-heart'></i>
             )}

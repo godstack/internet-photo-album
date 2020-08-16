@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { useParams, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
@@ -7,19 +7,20 @@ import { Loader } from '../../components/Loader/Loader';
 import './UserListPage.css';
 import { useMessage } from '../../hooks/useMessage';
 import { UserItem } from '../../components/UserItem/UserItem';
+import { Pagination } from '../../components/Pagination/Pagination';
 
-export const UserListPage = () => {
+export const UserListPage = ({ userListType }) => {
   const { nickname } = useParams();
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(null);
   const [userList, setUserList] = useState(null);
-  const [userListType, setUserListType] = useState(
-    window.location.href.split('/').pop()
-  );
+
   const { request, loading, error, clearError } = useHttp();
   const message = useMessage();
   const auth = useContext(AuthContext);
   const history = useHistory();
 
-  const fetchUserList = async () => {
+  const fetchUserList = useCallback(async () => {
     const data = await request(
       `/api/user/${nickname}/${userListType}`,
       'GET',
@@ -30,7 +31,24 @@ export const UserListPage = () => {
     );
 
     setUserList(data.userList);
-  };
+  }, [auth.user.token, nickname, request, userListType]);
+
+  const fetchAllUsersList = useCallback(
+    async currentPage => {
+      const data = await request(
+        `/api/users/get?page=${currentPage}`,
+        'GET',
+        null,
+        {
+          authorization: `Bearer ${auth.user.token}`
+        }
+      );
+
+      setUserList(data.userList);
+      setMaxPage(data.pagesCount);
+    },
+    [auth.user.token, request]
+  );
 
   useEffect(() => {
     message(error);
@@ -41,13 +59,15 @@ export const UserListPage = () => {
     }
 
     clearError();
-  }, [message, clearError, error]);
+  }, [message, clearError, error, auth, history]);
 
   useEffect(() => {
-    fetchUserList();
-
-    console.log(userList);
-  }, []);
+    if (userListType === 'following' || userListType === 'followers') {
+      fetchUserList();
+    } else if (userListType === 'all users') {
+      fetchAllUsersList(page);
+    }
+  }, [fetchUserList, fetchAllUsersList, page]);
 
   if (loading) {
     return <Loader />;
@@ -59,10 +79,12 @@ export const UserListPage = () => {
         <header className='userlist__header'>{userListType}</header>
         <div className='userlist__list'>
           {userList?.map(user => (
-            <UserItem user={user} />
+            <UserItem user={user} key={user.nickname} />
           ))}
         </div>
       </div>
+
+      <Pagination currentPage={page} pageCount={maxPage} setPage={setPage} />
     </div>
   );
 };
