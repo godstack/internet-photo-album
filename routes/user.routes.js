@@ -3,6 +3,9 @@ const router = Router();
 const Post = require('../models/Post');
 const User = require('../models/User');
 const auth = require('../middleware/auth.middleware');
+const mongodb = require('mongodb');
+const path = require('path');
+const binary = mongodb.Binary;
 
 // /api/user/profile
 router.get('/profile/:nickname', auth, async (req, res) => {
@@ -160,6 +163,55 @@ router.get('/:nickname/following', auth, async (req, res) => {
     const result = await getFollowersOrFollowing(nickname, page, 'following');
 
     res.json(result);
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
+router.get('/settings', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId);
+
+    res.json({
+      profilePhoto: user.profilePhoto,
+      email: user.email,
+      nickname: user.nickname
+    });
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
+router.post('/settings/photo', auth, async (req, res) => {
+  try {
+    if (!req.files.image.data) {
+      return res.status(400).json({ message: 'Select an image!' });
+    }
+
+    const file = binary(req.files.image.data);
+    const extension = path.extname(req.files.image.name);
+    const size = req.files.image.data.length;
+
+    const allowedExtensions = /png|jpeg|jpg|gif/;
+
+    if (!allowedExtensions.test(extension)) {
+      throw 'Upload images only!';
+    }
+    if (size > 5 * 1024 * 1024) {
+      throw 'File must be less than 5MB';
+    }
+
+    const user = await User.findById(req.user.userId);
+
+    user.profilePhoto = file;
+
+    await user.save();
+
+    res.json({ message: 'Profile picture updated successfully' });
   } catch (e) {
     res
       .status(400)

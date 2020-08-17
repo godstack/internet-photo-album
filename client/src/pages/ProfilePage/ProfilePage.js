@@ -10,6 +10,7 @@ import { useParams, useHistory, NavLink } from 'react-router-dom';
 
 import './ProfilePage.css';
 import { Pagination } from '../../components/Pagination/Pagination';
+import { ProfileImage } from '../../components/ProfileImage/ProfileImage';
 
 export const ProfilePage = props => {
   const [posts, setPosts] = useState(null);
@@ -108,17 +109,7 @@ export const ProfilePage = props => {
   return (
     <div className='profile-page'>
       <header className='profile-page__header'>
-        <div className='profile-image-wrapper'>
-          {user.profilePhoto ? (
-            <img
-              className='profile-image'
-              src={`data:image/jpeg;base64,${user.profilePhoto}`}
-              alt='profile'
-            />
-          ) : (
-            <p>No profile photo</p>
-          )}
-        </div>
+        <ProfileImage photo={user.profilePhoto} imageSize={150} />
 
         <section className='profile-info'>
           <div className='profile-info__wrapper-1'>

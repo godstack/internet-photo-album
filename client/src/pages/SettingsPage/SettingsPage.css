@@ -1,0 +1,8 @@
+.settings {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.settings input::placeholder {
+  color: grey;
+}

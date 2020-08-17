@@ -14,6 +14,10 @@ const Post = require('../models/Post');
 // /api/post/upload
 router.post('/upload', auth, async (req, res) => {
   try {
+    if (!req.files.image.data) {
+      return res.status(400).json({ message: 'Select an image!' });
+    }
+
     const file = binary(req.files.image.data);
     const extension = path.extname(req.files.image.name);
     const size = req.files.image.data.length;
