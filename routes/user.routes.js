@@ -7,6 +7,11 @@ const auth = require('../middleware/auth.middleware');
 // /api/user/profile
 router.get('/profile/:nickname', auth, async (req, res) => {
   try {
+    const { page } = req.query;
+
+    const PAGE_SIZE = 5;
+    const skip = (page - 1) * PAGE_SIZE;
+
     const { nickname } = req.params;
 
     const user = await User.findOne({ nickname });
@@ -15,9 +20,13 @@ router.get('/profile/:nickname', auth, async (req, res) => {
       return res.status(404).json({ message: 'Such user does not exist' });
     }
 
-    const posts = await Post.find({ postedBy: user._id });
+    const posts = await Post.find({ postedBy: user._id })
+      .skip(skip)
+      .limit(PAGE_SIZE);
+    const count = await Post.find({ postedBy: user._id }).countDocuments();
+    let pagesCount = Math.ceil(count / PAGE_SIZE);
 
-    res.json({ posts, user });
+    res.json({ posts, user, pagesCount, postsCount: count });
   } catch (e) {
     res
       .status(400)
@@ -100,13 +109,42 @@ router.post('/follow/:nickname', auth, async (req, res) => {
   }
 });
 
+async function getFollowersOrFollowing(nickname, page, type) {
+  const PAGE_SIZE = 5;
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const user = await User.findOne({ nickname });
+
+  const count = user[type].length;
+  let pagesCount = Math.ceil(count / PAGE_SIZE);
+
+  const partArr = [];
+
+  for (let i = skip; i < skip + PAGE_SIZE; i++) {
+    if (user[type][i]) {
+      partArr.push(user[type][i]);
+    } else {
+      break;
+    }
+  }
+
+  const result = {
+    userList: partArr,
+    pagesCount
+  };
+
+  return result;
+}
+
 router.get('/:nickname/followers', auth, async (req, res) => {
   try {
     const { nickname } = req.params;
 
-    const user = await User.findOne({ nickname });
+    const { page } = req.query;
 
-    res.json({ userList: user.followers });
+    const result = await getFollowersOrFollowing(nickname, page, 'followers');
+
+    res.json(result);
   } catch (e) {
     res
       .status(400)
@@ -118,9 +156,10 @@ router.get('/:nickname/following', auth, async (req, res) => {
   try {
     const { nickname } = req.params;
 
-    const user = await User.findOne({ nickname });
+    const { page } = req.query;
+    const result = await getFollowersOrFollowing(nickname, page, 'following');
 
-    res.json({ userList: user.following });
+    res.json(result);
   } catch (e) {
     res
       .status(400)

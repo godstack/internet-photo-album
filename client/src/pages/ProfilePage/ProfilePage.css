@@ -90,3 +90,12 @@
   justify-content: flex-start;
   margin-bottom: 30px;
 }
+
+.profile__pagination {
+  margin: 20px auto;
+  width: fit-content;
+}
+
+.profile__pagination input {
+  color: black;
+}

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './Pagination.css';
 import { useMessage } from '../../hooks/useMessage';
 
-export const Pagination = ({ currentPage, pageCount, setPage }) => {
+export const Pagination = ({ currentPage, pagesCount, setPage }) => {
   const message = useMessage();
 
   const nextPageHandler = () => {
-    if (currentPage < pageCount) {
+    if (currentPage < pagesCount) {
       setPage(currentPage + 1);
     }
   };
@@ -27,18 +27,18 @@ export const Pagination = ({ currentPage, pageCount, setPage }) => {
       setPreviousDisabled(false);
     }
 
-    if (currentPage === pageCount) {
+    if (currentPage >= pagesCount) {
       setNextDisabled(true);
     } else {
       setNextDisabled(false);
     }
-  }, [currentPage, pageCount]);
+  }, [currentPage, pagesCount]);
 
   const handleCurrentPageChange = e => {
     if (e.charCode === 13) {
       const value = parseInt(e.target.value);
 
-      if (value >= 1 && value <= pageCount) {
+      if (value >= 1 && value <= pagesCount) {
         setPage(value);
       }
     }
@@ -63,7 +63,9 @@ export const Pagination = ({ currentPage, pageCount, setPage }) => {
       </div>
       <div className='pagination__all'>
         <span className='pagination__text'>Last page:</span>{' '}
-        <span className='pagination__counter'>{pageCount}</span>
+        <span className='pagination__counter'>
+          {pagesCount === 0 ? 1 : pagesCount}
+        </span>
       </div>
       <button
         className='pagination__btn'

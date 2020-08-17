@@ -12,7 +12,7 @@ import { Pagination } from '../../components/Pagination/Pagination';
 export const UserListPage = ({ userListType }) => {
   const { nickname } = useParams();
   const [page, setPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(null);
+  const [pagesCount, setPagesCount] = useState(null);
   const [userList, setUserList] = useState(null);
 
   const { request, loading, error, clearError } = useHttp();
@@ -20,18 +20,22 @@ export const UserListPage = ({ userListType }) => {
   const auth = useContext(AuthContext);
   const history = useHistory();
 
-  const fetchUserList = useCallback(async () => {
-    const data = await request(
-      `/api/user/${nickname}/${userListType}`,
-      'GET',
-      null,
-      {
-        authorization: `Bearer ${auth.user.token}`
-      }
-    );
-
-    setUserList(data.userList);
-  }, [auth.user.token, nickname, request, userListType]);
+  const fetchUserList = useCallback(
+    async currentPage => {
+      const data = await request(
+        `/api/user/${nickname}/${userListType}?page=${currentPage}`,
+        'GET',
+        null,
+        {
+          authorization: `Bearer ${auth.user.token}`
+        }
+      );
+      debugger;
+      setUserList(data.userList);
+      setPagesCount(data.pagesCount);
+    },
+    [auth.user.token, nickname, request, userListType]
+  );
 
   const fetchAllUsersList = useCallback(
     async currentPage => {
@@ -45,7 +49,7 @@ export const UserListPage = ({ userListType }) => {
       );
 
       setUserList(data.userList);
-      setMaxPage(data.pagesCount);
+      setPagesCount(data.pagesCount);
     },
     [auth.user.token, request]
   );
@@ -63,7 +67,7 @@ export const UserListPage = ({ userListType }) => {
 
   useEffect(() => {
     if (userListType === 'following' || userListType === 'followers') {
-      fetchUserList();
+      fetchUserList(page);
     } else if (userListType === 'all users') {
       fetchAllUsersList(page);
     }
@@ -84,7 +88,11 @@ export const UserListPage = ({ userListType }) => {
         </div>
       </div>
 
-      <Pagination currentPage={page} pageCount={maxPage} setPage={setPage} />
+      <Pagination
+        currentPage={page}
+        pagesCount={pagesCount}
+        setPage={setPage}
+      />
     </div>
   );
 };

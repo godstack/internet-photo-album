@@ -9,10 +9,14 @@ import { Post } from '../../components/Post/Post';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 
 import './ProfilePage.css';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 export const ProfilePage = props => {
   const [posts, setPosts] = useState(null);
   const [user, setUser] = useState(null);
+  const [postsCount, setPostsCount] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pagesCount, setPagesCount] = useState(1);
 
   const { nickname } = useParams();
 
@@ -52,21 +56,31 @@ export const ProfilePage = props => {
     }
   };
 
-  const fetchInfo = useCallback(async () => {
-    const data = await request(`/api/user/profile/${nickname}`, 'GET', null, {
-      authorization: `Bearer ${auth.user.token}`
-    });
+  const fetchInfo = useCallback(
+    async currentPage => {
+      const data = await request(
+        `/api/user/profile/${nickname}?page=${currentPage}`,
+        'GET',
+        null,
+        {
+          authorization: `Bearer ${auth.user.token}`
+        }
+      );
 
-    if (data?.user?.profilePhoto) {
-      data.user.profilePhoto = Buffer.from(
-        data.user.profilePhoto,
-        'binary'
-      ).toString('base64');
-    }
+      if (data?.user?.profilePhoto) {
+        data.user.profilePhoto = Buffer.from(
+          data.user.profilePhoto,
+          'binary'
+        ).toString('base64');
+      }
 
-    setPosts(data.posts);
-    setUser(data.user);
-  }, [auth.user.token, nickname, request]);
+      setPosts(data.posts);
+      setUser(data.user);
+      setPagesCount(data.pagesCount);
+      setPostsCount(data.postsCount);
+    },
+    [auth.user.token, nickname, request]
+  );
 
   useEffect(() => {
     message(error);
@@ -80,8 +94,8 @@ export const ProfilePage = props => {
   }, [message, error, clearError, auth, history]);
 
   useEffect(() => {
-    fetchInfo();
-  }, [fetchInfo]);
+    fetchInfo(page);
+  }, [fetchInfo, page]);
 
   if (loading) {
     return <Loader />;
@@ -112,7 +126,7 @@ export const ProfilePage = props => {
             {showFollowButton()}
           </div>
           <ul className='profile-info__amount'>
-            <li>{posts?.length} posts</li>
+            <li>{postsCount} posts</li>
             <li>
               <NavLink
                 to={`/user/${nickname}/followers`}
@@ -137,6 +151,14 @@ export const ProfilePage = props => {
         {posts.map(post => (
           <Post post={post} key={post._id} />
         ))}
+      </div>
+
+      <div className='profile__pagination'>
+        <Pagination
+          currentPage={page}
+          pagesCount={pagesCount}
+          setPage={setPage}
+        />
       </div>
     </div>
   );

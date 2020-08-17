@@ -13,7 +13,7 @@ router.get('/get', auth, async (req, res) => {
     const skip = (page - 1) * PAGE_SIZE;
 
     const users = await User.find({}).skip(skip).limit(PAGE_SIZE);
-    const count = await User.find().count();
+    const count = await User.find().countDocuments();
     let pagesCount = Math.ceil(count / PAGE_SIZE);
 
     let userList = [];
