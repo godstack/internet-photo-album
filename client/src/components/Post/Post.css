@@ -4,11 +4,12 @@
 }
 
 .post img {
-  height: 450px;
-  width: 300px;
+  margin: 0 auto;
+  width: auto;
+  height: 100%;
 }
 
 .post .placeholder {
-  height: 450px;
+  height: 300px;
   width: 300px;
 }

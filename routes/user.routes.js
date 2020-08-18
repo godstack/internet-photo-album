@@ -219,4 +219,40 @@ router.post('/settings/photo', auth, async (req, res) => {
   }
 });
 
+router.put('/settings/change', auth, async (req, res) => {
+  try {
+    const { nickname, email } = req.body;
+
+    const regexForEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    const isEmail = regexForEmail.test(email);
+
+    if (!isEmail) {
+      return res.status(400).json({ message: 'Wrong email, try again' });
+    }
+
+    if (nickname.length < 6) {
+      return res
+        .status(400)
+        .json({ message: 'Nickname should be longer, than 6 characters' });
+    }
+
+    const user = await User.findById(req.user.userId);
+
+    user.nickname = nickname;
+    user.email = email;
+
+    await user.save();
+
+    res.json({
+      new: { nickname, email },
+      message: 'Profile data updated successfully'
+    });
+  } catch (e) {
+    res
+      .status(400)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
 module.exports = router;

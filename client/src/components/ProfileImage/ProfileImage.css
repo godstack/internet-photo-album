@@ -5,9 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(168, 153, 153);
+  background-color: rgba(168, 153, 153, 0.5);
+  overflow: hidden;
 }
 
 .profile-image {
-  border-radius: 50%;
+  height: 100%;
+  width: auto;
 }

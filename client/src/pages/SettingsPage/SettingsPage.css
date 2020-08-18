@@ -3,6 +3,21 @@
   margin: 0 auto;
 }
 
-.settings input::placeholder {
-  color: grey;
+.settings input {
+  color: black;
+}
+
+.image-field {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.settings-btn {
+  margin-top: 30px;
+}
+
+.settings .input-field {
+  color: black;
 }

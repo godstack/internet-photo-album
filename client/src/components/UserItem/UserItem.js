@@ -8,9 +8,8 @@ import { Loader } from '../Loader/Loader';
 import { useMessage } from '../../hooks/useMessage';
 
 export const UserItem = ({ user }) => {
-  const { user: authUser } = useContext(AuthContext);
   const { request, loading, error, clearError } = useHttp();
-  const auth = useContext(AuthContext);
+  const { login, user: authUser, logout } = useContext(AuthContext);
   const message = useMessage();
   const history = useHistory();
 
@@ -20,23 +19,23 @@ export const UserItem = ({ user }) => {
       'POST',
       null,
       {
-        authorization: `Bearer ${auth.user.token}`
+        authorization: `Bearer ${authUser.token}`
       }
     );
 
-    auth.login({ ...auth.user, following: data.followingAuth });
+    login({ ...authUser, following: data.followingAuth });
   };
 
   useEffect(() => {
     message(error);
 
     if (error?.toLowerCase() === 'no authorization') {
-      auth.logout();
+      logout();
       history.push('/login');
     }
 
     clearError();
-  }, [message, clearError, error, auth, history]);
+  }, [message, clearError, error, logout, history]);
 
   const showFollowButton = () => {
     if (authUser.nickname !== user.nickname) {

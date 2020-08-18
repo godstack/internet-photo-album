@@ -14,7 +14,9 @@ export const SettingsPage = () => {
   const [user, setUser] = useState(null);
   const [disabled, setDisabled] = useState(true);
 
-  const [form, setForm] = useState({ nickname: '', email: '', file: null });
+  const [file, setFile] = useState(null);
+
+  const [form, setForm] = useState({ nickname: '', email: '' });
 
   const { request, error, clearError } = useHttp();
   const [loading, setLoading] = useState(false);
@@ -28,7 +30,7 @@ export const SettingsPage = () => {
     const data = await request(`/api/user/settings`, 'GET', null, {
       authorization: `Bearer ${auth.user.token}`
     });
-    debugger;
+
     if (data?.profilePhoto) {
       data.profilePhoto = Buffer.from(data.profilePhoto, 'binary').toString(
         'base64'
@@ -42,11 +44,13 @@ export const SettingsPage = () => {
 
   const handleChange = async e => {
     const { name, value, files } = e.target;
-    setDisabled(true);
+    setDisabled(false);
+
     debugger;
+
     name === 'file'
       ? setForm({ ...form, [name]: files[0] })
-      : setUser({ ...user, [name]: value });
+      : setForm({ ...form, [name]: value });
     console.log(JSON.stringify(form));
   };
 
@@ -71,7 +75,7 @@ export const SettingsPage = () => {
 
       fd.append('image', compressedFile, form.file.name);
 
-      const data = await request(
+      await request(
         '/api/user/settings/photo',
         'POST',
         fd,
@@ -80,6 +84,8 @@ export const SettingsPage = () => {
         },
         false
       );
+
+      history.push(`/user/${auth.user.nickname}`);
 
       setLoading(false);
     } else {
@@ -102,6 +108,23 @@ export const SettingsPage = () => {
     clearError();
   }, [message, clearError, error, auth, history]);
 
+  const submitChanges = async () => {
+    debugger;
+    const data = await request(
+      '/api/user/settings/change',
+      'PUT',
+      { nickname: form.nickname, email: form.email },
+      {
+        authorization: `Bearer ${auth.user.token}`
+      }
+    );
+
+    setUser({ ...user, ...data.new });
+
+    auth.login({ ...auth.user, nickname: data.new.nickname });
+    message(data.message);
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -115,7 +138,7 @@ export const SettingsPage = () => {
           loading={loading}
           uploadHandler={uploadHandler}
           handleChange={handleChange}
-          title={'Change profile image'}
+          title={'Profile image'}
           filename={form?.file?.name}
         />
       </div>
@@ -125,6 +148,7 @@ export const SettingsPage = () => {
           type='text'
           name='nickname'
           placeholder='Nickname'
+          value={form.nickname}
           onChange={handleChange}
         />
         <label htmlFor='nickname'>Nickname</label>
@@ -135,12 +159,19 @@ export const SettingsPage = () => {
           type='text'
           name='email'
           placeholder='Email'
+          value={form.email}
           onChange={handleChange}
         />
         <label htmlFor='email'>Email</label>
       </div>
 
-      <button className='btn'>Apply Changes</button>
+      <button
+        className='btn settings-btn'
+        disabled={disabled}
+        onClick={submitChanges}
+      >
+        Apply Changes
+      </button>
     </div>
   );
 };
