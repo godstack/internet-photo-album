@@ -42,6 +42,9 @@ export const Navigation = () => {
           </NavLink>
         </div>
       </div>
+      <NavLink to='/info' className='nav__item'>
+        <i className='fas fa-info-circle'></i>
+      </NavLink>
     </nav>
   );
 };

@@ -7,6 +7,7 @@ import { CreatePage } from './pages/CreatePage/CreatePage';
 import { PostPage } from './pages/PostPage/PostPage';
 import { UserListPage } from './pages/UserListPage/UserListPage';
 import { SettingsPage } from './pages/SettingsPage/SettingPage';
+import { InfoPage } from './pages/InfoPage/InfoPage';
 
 export const useRoutes = (isAuthenticated, nickname) => {
   if (isAuthenticated) {
@@ -24,7 +25,8 @@ export const useRoutes = (isAuthenticated, nickname) => {
         <Route exact path='/users'>
           <UserListPage userListType={'all users'} />
         </Route>
-        <Route exact path='/settings' component={SettingsPage}></Route>
+        <Route exact path='/settings' component={SettingsPage} />
+        <Route exact path='/info' component={InfoPage} />
 
         <Redirect to={`/user/${nickname}`} />
       </Switch>

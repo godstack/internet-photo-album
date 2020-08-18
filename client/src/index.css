@@ -158,3 +158,9 @@ main {
   min-height: 100vh;
   background: rgb(250, 250, 250);
 }
+
+button,
+button:active,
+button:focus {
+  outline: none;
+}
