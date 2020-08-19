@@ -2,13 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import classNames from 'classnames';
-import './UserItem.css';
-import { useHttp } from '../../hooks/http.hook';
-import { Loader } from '../Loader/Loader';
 import { useMessage } from '../../hooks/useMessage';
+import './UserItem.css';
 
-export const UserItem = ({ user }) => {
-  const { request, loading, error, clearError } = useHttp();
+export const UserItem = ({ user, request }) => {
   const { login, user: authUser, logout } = useContext(AuthContext);
   const message = useMessage();
   const history = useHistory();
@@ -25,17 +22,6 @@ export const UserItem = ({ user }) => {
 
     login({ ...authUser, following: data.followingAuth });
   };
-
-  useEffect(() => {
-    message(error);
-
-    if (error?.toLowerCase() === 'no authorization') {
-      logout();
-      history.push('/login');
-    }
-
-    clearError();
-  }, [message, clearError, error, logout, history]);
 
   const showFollowButton = () => {
     if (authUser.nickname !== user.nickname) {
@@ -57,10 +43,6 @@ export const UserItem = ({ user }) => {
       );
     }
   };
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <div className='user-item'>

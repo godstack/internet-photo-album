@@ -46,20 +46,15 @@ export const SettingsPage = () => {
     const { name, value, files } = e.target;
     setDisabled(false);
 
-    debugger;
-
     name === 'file'
       ? setForm({ ...form, [name]: files[0] })
       : setForm({ ...form, [name]: value });
-    console.log(JSON.stringify(form));
   };
 
   const uploadHandler = async () => {
     if (form.file) {
       setLoading(true);
       const fd = new FormData();
-
-      console.log(`originalFile size ${form.file.size / 1024 / 1024} MB`);
 
       const options = {
         maxSizeMB: 0.05,
@@ -68,10 +63,6 @@ export const SettingsPage = () => {
       };
 
       const compressedFile = await imageCompression(form.file, options);
-
-      console.log(
-        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-      ); // smaller than maxSizeMB
 
       fd.append('image', compressedFile, form.file.name);
 
@@ -109,7 +100,6 @@ export const SettingsPage = () => {
   }, [message, clearError, error, auth, history]);
 
   const submitChanges = async () => {
-    debugger;
     const data = await request(
       '/api/user/settings/change',
       'PUT',

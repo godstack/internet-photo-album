@@ -83,7 +83,7 @@ export const UserListPage = ({ userListType }) => {
         <header className='userlist__header'>{userListType}</header>
         <div className='userlist__list'>
           {userList?.map(user => (
-            <UserItem user={user} key={user.nickname} />
+            <UserItem user={user} key={user.nickname} request={request} />
           ))}
         </div>
       </div>

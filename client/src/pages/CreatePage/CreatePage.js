@@ -43,8 +43,6 @@ export const CreatePage = () => {
       setLoading(true);
       const fd = new FormData();
 
-      console.log(`originalFile size ${form.file.size / 1024 / 1024} MB`);
-
       const options = {
         maxSizeMB: 0.05,
         maxWidthOrHeight: 500,
@@ -52,10 +50,6 @@ export const CreatePage = () => {
       };
 
       const compressedFile = await imageCompression(form.file, options);
-
-      console.log(
-        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-      ); // smaller than maxSizeMB
 
       fd.append('image', compressedFile, form.file.name);
 
