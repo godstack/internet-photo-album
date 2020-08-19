@@ -23,7 +23,6 @@ export const UserListPage = ({ userListType }) => {
 
   const fetchUserList = useCallback(
     async (currentPage, search) => {
-      debugger;
       const data = await request(
         `/api/user/${nickname}/${userListType}?page=${currentPage}&&search=${search}`,
         'GET',
@@ -57,9 +56,6 @@ export const UserListPage = ({ userListType }) => {
   );
 
   const handleSearch = () => {
-    debugger;
-
-    console.log(nicknameToSearch);
     if (setNicknameToSearch) {
       setPage(1);
 

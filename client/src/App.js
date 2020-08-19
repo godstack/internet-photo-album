@@ -24,7 +24,7 @@ function App() {
     <AuthContext.Provider value={{ login, logout, isAuthenticated, user }}>
       <Router>
         <Header />
-        <main>{routes}</main>
+        <main className='main'>{routes}</main>
       </Router>
     </AuthContext.Provider>
   );

@@ -25,10 +25,12 @@ export const Slider = props => {
       >
         <i className='fas fa-arrow-circle-left'></i>
       </button>
-      <img src={images[currentImageIndex]} alt='' className='slider__img' />
-      <p className='slider__counter'>
-        {currentImageIndex + 1} of {images.length}
-      </p>
+      <div className='slider__img-wrapper'>
+        <img src={images[currentImageIndex]} alt='' className='slider__img' />
+        <p className='slider__counter'>
+          {currentImageIndex + 1} of {images.length}
+        </p>
+      </div>
       <button
         onClick={nextSlideHandler}
         className='slider__btn slider__btn-next'

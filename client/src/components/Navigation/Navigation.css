@@ -1,11 +1,12 @@
 .nav {
+  margin-left: 10px;
   display: flex;
 }
 
 .nav__item {
   padding: 10px 15px;
   font-size: 1.3rem;
-  border-left: 1px solid #bbb;
+  border-left: 3px solid #bbb;
   cursor: pointer;
 }
 
@@ -14,7 +15,6 @@
 }
 
 .nav__item:hover {
-  background-color: rgb(34, 162, 194);
   border-radius: 4px;
   color: white;
 }
