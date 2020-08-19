@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { useHttp } from '../../hooks/http.hook';
 import { Loader } from '../Loader/Loader';
@@ -47,6 +47,9 @@ export const PostCard = props => {
     <>
       {loading && <Loader />}
       <div className='post-card'>
+        <NavLink className='post-card__nickname' to={`user/${props.postedBy}`}>
+          {props.postedBy}
+        </NavLink>
         <div className='placeholder'>
           <img src={`data:image/jpeg;base64,${base64data}`} alt='post' />
         </div>
@@ -62,8 +65,12 @@ export const PostCard = props => {
               <i className='far fa-heart'></i>
             )}
           </button>
-          <div>Liked by {post.likes.length} people</div>
-          <div>Creation date: {new Date(post.date).toLocaleDateString()}</div>
+          <div className='post-card__additional-p'>
+            Liked by {post.likes.length} people
+          </div>
+          <div className='post-card__additional-p'>
+            Creation date: {new Date(post.date).toLocaleDateString()}
+          </div>
         </div>
       </div>
     </>

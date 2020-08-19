@@ -14,7 +14,7 @@ export const ProfileImage = ({ photo, imageSize }) => {
           alt='profile'
         />
       ) : (
-        <p>No profile photo</p>
+        <p className='no-photo__p'>No profile photo</p>
       )}
     </div>
   );

@@ -17,6 +17,7 @@ export const PostPage = () => {
   const { request, loading, error, clearError } = useHttp();
   const { postId } = useParams();
   const { token } = useContext(AuthContext);
+  const [postedBy, setPostedBy] = useState('');
   const message = useMessage();
 
   useEffect(() => {
@@ -31,11 +32,12 @@ export const PostPage = () => {
   }, [error, message, clearError, auth, history]);
 
   const getPost = useCallback(async () => {
-    const fetched = await request(`/api/post/${postId}`, 'GET', null, {
+    const data = await request(`/api/post/${postId}`, 'GET', null, {
       authorization: `Bearer ${token}`
     });
 
-    setPost(fetched);
+    setPost(data.post);
+    setPostedBy(data.nickname);
   }, [token, postId, request]);
 
   useEffect(() => {
@@ -46,5 +48,7 @@ export const PostPage = () => {
     return <Loader />;
   }
 
-  return <>{!loading && post && <PostCard post={post} />}</>;
+  return (
+    <>{!loading && post && <PostCard post={post} postedBy={postedBy} />}</>
+  );
 };

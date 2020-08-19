@@ -107,7 +107,10 @@ export const ProfilePage = props => {
   return (
     <div className='profile-page'>
       <header className='profile-page__header'>
-        <ProfileImage photo={user.profilePhoto} imageSize={150} />
+        <ProfileImage
+          photo={user.profilePhoto}
+          imageSize={window.innerWidth > 550 ? 150 : 60}
+        />
 
         <section className='profile-info'>
           <div className='profile-info__wrapper-1'>

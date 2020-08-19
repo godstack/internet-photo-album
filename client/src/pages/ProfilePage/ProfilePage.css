@@ -30,12 +30,12 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .profile-info__nickname {
-  font-weight: lighter;
-  font-size: 2rem;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
 
 .profile-no-user {
@@ -73,11 +73,30 @@
   margin-bottom: 30px;
 }
 
-.profile__pagination {
-  margin: 20px auto;
-  width: fit-content;
-}
-
 .profile__pagination input {
   color: black;
+}
+
+.profile-info__follow-btn {
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 550px) {
+  .profile__pagination {
+    margin: 20px auto;
+    width: fit-content;
+  }
+
+  .profile-info__follow-btn {
+    font-size: 1.3rem;
+  }
+
+  .profile-info__nickname {
+    font-weight: lighter;
+    font-size: 2rem;
+  }
+
+  .profile-info__amount {
+    font-size: 1.3rem;
+  }
 }

@@ -24,7 +24,6 @@ export const UserItem = ({ user, request }) => {
   };
 
   const showFollowButton = () => {
-    debugger;
     if (authUser.nickname !== user.nickname) {
       const isFollowing = !!authUser.following.find(el => el === user._id);
 

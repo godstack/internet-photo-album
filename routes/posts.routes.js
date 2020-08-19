@@ -11,6 +11,8 @@ const binary = mongodb.Binary;
 
 const Post = require('../models/Post');
 
+const User = require('../models/User');
+
 // /api/post/upload
 router.post('/upload', auth, async (req, res) => {
   try {
@@ -82,7 +84,9 @@ router.get('/', auth, async (req, res) => {
 
     res.json(posts);
   } catch (e) {
-    res.status(500).json({ message: 'Something went wrong, try again' });
+    res
+      .status(500)
+      .json({ message: e.message || 'Something went wrong, try again' });
   }
 });
 
@@ -90,9 +94,13 @@ router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    res.json(post);
+    const user = await User.findById(post.postedBy);
+
+    res.json({ post, nickname: user.nickname });
   } catch (e) {
-    res.status(500).json({ message: 'Something went wrong, try again' });
+    res
+      .status(500)
+      .json({ message: e.message || 'Something went wrong, try again' });
   }
 });
 

@@ -1,5 +1,5 @@
 .pagination {
-  width: 400px;
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -7,9 +7,10 @@
 
 .pagination__btn {
   cursor: pointer;
+  font-size: 10px;
   border-radius: 50%;
   border: 1px solid black;
-  padding: 10px 15px;
+  padding: 5px 7px;
 }
 
 .pagination__btn:hover {
@@ -26,10 +27,29 @@
 }
 
 .pagination__text {
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .pagination__counter {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: rgb(0, 255, 115);
+}
+
+@media screen and (min-width: 500px) {
+  .pagination {
+    width: 450px;
+  }
+
+  .pagination__btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+
+  .pagination__text {
+    font-size: 1.3rem;
+  }
+
+  .pagination__counter {
+    font-size: 1.3rem;
+  }
 }

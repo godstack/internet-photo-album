@@ -1,6 +1,6 @@
 .post {
   cursor: pointer;
-  margin: 20px;
+  margin: 5px;
 }
 
 .post img {
@@ -10,6 +10,24 @@
 }
 
 .post .placeholder {
-  height: 300px;
-  width: 300px;
+  height: 100px;
+  width: 100px;
+}
+
+@media screen and (min-width: 500px) {
+  .post .placeholder {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .post .placeholder {
+    height: 300px;
+    width: 300px;
+  }
+
+  .post {
+    margin: 10px;
+  }
 }

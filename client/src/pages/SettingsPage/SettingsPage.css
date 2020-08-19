@@ -1,5 +1,5 @@
 .settings {
-  width: 600px;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -9,15 +9,31 @@
 
 .image-field {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .settings-btn {
-  margin-top: 30px;
+  margin: 30px 0;
+}
+
+.settings input {
+  width: 100%;
 }
 
 .settings .input-field {
   color: black;
+}
+
+@media screen and (min-width: 700px) {
+  .settings {
+    width: 600px;
+  }
+
+  .image-field {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
 }

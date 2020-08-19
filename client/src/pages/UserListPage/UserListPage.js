@@ -47,7 +47,7 @@ export const UserListPage = ({ userListType }) => {
           authorization: `Bearer ${auth.user.token}`
         }
       );
-      debugger;
+
       setUserList(data.userList);
       setPagesCount(data.pagesCount);
     },
