@@ -106,20 +106,30 @@ router.post('/follow/:nickname', auth, async (req, res) => {
   }
 });
 
-async function getFollowersOrFollowing(nickname, page, type) {
+async function getFollowersOrFollowing(nickname, page, search, type) {
   const PAGE_SIZE = 5;
   const skip = (page - 1) * PAGE_SIZE;
 
   const user = await User.findOne({ nickname });
 
-  const count = user[type].length;
+  const userList = [];
+
+  for (let i = 0; i < user[type].length; i++) {
+    const item = await User.findById(user[type][i]);
+
+    if (item.nickname.includes(search)) {
+      userList.push(user[type][i]);
+    }
+  }
+
+  const count = userList.length;
   let pagesCount = Math.ceil(count / PAGE_SIZE);
 
   const partArr = [];
 
   for (let i = skip; i < skip + PAGE_SIZE; i++) {
-    if (user[type][i]) {
-      const followUser = await User.findById(user[type][i]);
+    if (userList[i]) {
+      const followUser = await User.findById(userList[i]);
 
       partArr.push({
         _id: followUser._id,
@@ -143,9 +153,16 @@ router.get('/:nickname/followers', auth, async (req, res) => {
   try {
     const { nickname } = req.params;
 
+    const { search } = req.query;
+
     const { page } = req.query;
 
-    const result = await getFollowersOrFollowing(nickname, page, 'followers');
+    const result = await getFollowersOrFollowing(
+      nickname,
+      page,
+      search,
+      'followers'
+    );
 
     res.json(result);
   } catch (e) {
@@ -159,8 +176,15 @@ router.get('/:nickname/following', auth, async (req, res) => {
   try {
     const { nickname } = req.params;
 
+    const { search } = req.query;
+
     const { page } = req.query;
-    const result = await getFollowersOrFollowing(nickname, page, 'following');
+    const result = await getFollowersOrFollowing(
+      nickname,
+      page,
+      search,
+      'following'
+    );
 
     res.json(result);
   } catch (e) {

@@ -4,7 +4,6 @@ import './Slider.css';
 export const Slider = props => {
   const [images, setImages] = useState(props.images);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isLooped, setIsLooped] = useState(false);
 
   const nextSlideHandler = e => {
     currentImageIndex < images.length - 1

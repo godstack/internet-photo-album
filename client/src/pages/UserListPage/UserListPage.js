@@ -14,6 +14,7 @@ export const UserListPage = ({ userListType }) => {
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(null);
   const [userList, setUserList] = useState(null);
+  const [nicknameToSearch, setNicknameToSearch] = useState('');
 
   const { request, loading, error, clearError } = useHttp();
   const message = useMessage();
@@ -21,9 +22,10 @@ export const UserListPage = ({ userListType }) => {
   const history = useHistory();
 
   const fetchUserList = useCallback(
-    async currentPage => {
+    async (currentPage, search) => {
+      debugger;
       const data = await request(
-        `/api/user/${nickname}/${userListType}?page=${currentPage}`,
+        `/api/user/${nickname}/${userListType}?page=${currentPage}&&search=${search}`,
         'GET',
         null,
         {
@@ -38,9 +40,9 @@ export const UserListPage = ({ userListType }) => {
   );
 
   const fetchAllUsersList = useCallback(
-    async currentPage => {
+    async (currentPage, search) => {
       const data = await request(
-        `/api/users/get?page=${currentPage}`,
+        `/api/users/get?page=${currentPage}&&search=${search}`,
         'GET',
         null,
         {
@@ -53,6 +55,21 @@ export const UserListPage = ({ userListType }) => {
     },
     [auth.user.token, request]
   );
+
+  const handleSearch = () => {
+    debugger;
+
+    console.log(nicknameToSearch);
+    if (setNicknameToSearch) {
+      setPage(1);
+
+      if (userListType === 'following' || userListType === 'followers') {
+        fetchUserList(page, nicknameToSearch);
+      } else if (userListType === 'all users') {
+        fetchAllUsersList(page, nicknameToSearch);
+      }
+    }
+  };
 
   useEffect(() => {
     message(error);
@@ -67,11 +84,11 @@ export const UserListPage = ({ userListType }) => {
 
   useEffect(() => {
     if (userListType === 'following' || userListType === 'followers') {
-      fetchUserList(page);
+      fetchUserList(page, nicknameToSearch);
     } else if (userListType === 'all users') {
-      fetchAllUsersList(page);
+      fetchAllUsersList(page, nicknameToSearch);
     }
-  }, [fetchUserList, fetchAllUsersList, page]);
+  }, [fetchUserList, fetchAllUsersList, page, userListType]);
 
   if (loading) {
     return <Loader />;
@@ -79,6 +96,22 @@ export const UserListPage = ({ userListType }) => {
 
   return (
     <div className='user-list-wrapper'>
+      <div className='users-search'>
+        <div className='input-field'>
+          <input
+            type='text'
+            name='nicknameToSearch'
+            value={nicknameToSearch}
+            placeholder='Search users'
+            onChange={e => setNicknameToSearch(e.target.value)}
+          />
+          <label htmlFor='email'>Enter Nickname</label>
+        </div>
+        <button className='btn' onClick={handleSearch}>
+          Search
+        </button>
+      </div>
+
       <div className='userlist'>
         <header className='userlist__header'>{userListType}</header>
         <div className='userlist__list'>

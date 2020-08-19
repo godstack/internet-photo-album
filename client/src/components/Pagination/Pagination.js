@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Pagination.css';
-import { useMessage } from '../../hooks/useMessage';
 
 export const Pagination = ({ currentPage, pagesCount, setPage }) => {
-  const message = useMessage();
-
   const nextPageHandler = () => {
     if (currentPage < pagesCount) {
       setPage(currentPage + 1);

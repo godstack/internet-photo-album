@@ -1,14 +1,12 @@
-import React, { useContext, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import classNames from 'classnames';
-import { useMessage } from '../../hooks/useMessage';
+
 import './UserItem.css';
 
 export const UserItem = ({ user, request }) => {
-  const { login, user: authUser, logout } = useContext(AuthContext);
-  const message = useMessage();
-  const history = useHistory();
+  const { login, user: authUser } = useContext(AuthContext);
 
   const handleFollow = async () => {
     const data = await request(
