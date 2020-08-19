@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Slider } from '../../components/Slider/Slider';
+// import Maps from '../../components/Maps/Maps';
 
 export const InfoPage = () => {
   const images = [
@@ -9,5 +11,10 @@ export const InfoPage = () => {
     'https://i.kfs.io/album/global/71602135,0v1/fit/500x500.jpg'
   ];
 
-  return <Slider images={images} />;
+  return (
+    <div className='info-page'>
+      <Slider images={images} />
+      {/* <Maps /> */}
+    </div>
+  );
 };
