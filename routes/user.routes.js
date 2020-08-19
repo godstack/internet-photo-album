@@ -73,28 +73,22 @@ router.post('/follow/:nickname', auth, async (req, res) => {
 
     const aimUser = await User.findOne({ nickname: req.params.nickname });
 
-    const isFollowed = !!aimUser.followers.find(
-      el => el.nickname === authorizedUser.nickname
+    const isFollowed = !!aimUser.followers.find(el =>
+      el.equals(authorizedUser._id)
     );
 
     if (isFollowed) {
       const newFollowersArr = aimUser.followers.filter(
-        el => el.nickname !== authorizedUser.nickname
+        el => !el.equals(authorizedUser._id)
       );
       aimUser.followers = newFollowersArr;
       const newFollowingArr = authorizedUser.following.filter(
-        el => el.nickname !== aimUser.nickname
+        el => !el.equals(aimUser._id)
       );
       authorizedUser.following = newFollowingArr;
     } else {
-      aimUser.followers.push({
-        nickname: authorizedUser.nickname,
-        profilePhoto: authorizedUser.profilePhoto
-      });
-      authorizedUser.following.push({
-        nickname: aimUser.nickname,
-        profilePhoto: aimUser.profilePhoto
-      });
+      aimUser.followers.push(authorizedUser._id);
+      authorizedUser.following.push(aimUser._id);
     }
 
     await aimUser.save();
@@ -125,7 +119,13 @@ async function getFollowersOrFollowing(nickname, page, type) {
 
   for (let i = skip; i < skip + PAGE_SIZE; i++) {
     if (user[type][i]) {
-      partArr.push(user[type][i]);
+      const followUser = await User.findById(user[type][i]);
+
+      partArr.push({
+        _id: followUser._id,
+        nickname: followUser.nickname,
+        profilePhoto: followUser.profilePhoto
+      });
     } else {
       break;
     }

@@ -6,23 +6,22 @@ export const Slider = props => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLooped, setIsLooped] = useState(false);
 
-  const SlideHandler = e => {
-    if (e.target.dataset.direction === 'next') {
-      currentImageIndex < images.length - 1
-        ? setCurrentImageIndex(currentImageIndex + 1)
-        : setCurrentImageIndex(0);
-    } else {
-      currentImageIndex > 0
-        ? setCurrentImageIndex(currentImageIndex - 1)
-        : setCurrentImageIndex(images.length - 1);
-    }
+  const nextSlideHandler = e => {
+    currentImageIndex < images.length - 1
+      ? setCurrentImageIndex(currentImageIndex + 1)
+      : setCurrentImageIndex(0);
+  };
+
+  const prevSlideHandler = e => {
+    currentImageIndex > 0
+      ? setCurrentImageIndex(currentImageIndex - 1)
+      : setCurrentImageIndex(images.length - 1);
   };
 
   return (
     <div className='slider'>
       <button
-        data-direction='prev'
-        onClick={SlideHandler}
+        onClick={prevSlideHandler}
         className='slider__btn slider__btn-prev'
       >
         <i className='fas fa-arrow-circle-left'></i>
@@ -32,8 +31,7 @@ export const Slider = props => {
         {currentImageIndex + 1} of {images.length}
       </p>
       <button
-        data-direction='next'
-        onClick={SlideHandler}
+        onClick={nextSlideHandler}
         className='slider__btn slider__btn-next'
       >
         <i className='fas fa-arrow-circle-right'></i>

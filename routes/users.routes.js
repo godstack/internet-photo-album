@@ -21,7 +21,8 @@ router.get('/get', auth, async (req, res) => {
     for (const element of users) {
       userList.push({
         nickname: element.nickname,
-        profilePhoto: element.profilePhoto
+        profilePhoto: element.profilePhoto,
+        _id: element._id
       });
     }
 
