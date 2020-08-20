@@ -25,7 +25,7 @@ app.use('/api/user/', require('./routes/user.routes'));
 
 app.use('/api/users/', require('./routes/users.routes'));
 
-if (process.env.NODE.ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 
   app.get('*', (req, res) => {
