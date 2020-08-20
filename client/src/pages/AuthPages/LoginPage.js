@@ -34,9 +34,16 @@ export const LoginPage = () => {
   };
 
   return (
-    <>
+    <div className='auth-page'>
       {loading && <Loader />}
+
       <div className='form-container'>
+        <div className='form__header'>
+          <h3 className='form__type'>Account login</h3>
+          <NavLink className='form__redirect' to='/register'>
+            Register
+          </NavLink>
+        </div>
         <div className='input-field'>
           <input
             type='text'
@@ -57,21 +64,10 @@ export const LoginPage = () => {
           <label htmlFor='password'>Password</label>
         </div>
 
-        <div className='buttons'>
-          <button
-            disabled={loading}
-            className='btn btn-login'
-            onClick={loginHandler}
-          >
-            Login
-          </button>
-        </div>
-        <div className='form-link'>
-          <NavLink to='/register'>
-            Still don't have an account? Go to Register page
-          </NavLink>
-        </div>
+        <button disabled={loading} className='btn-auth' onClick={loginHandler}>
+          Login
+        </button>
       </div>
-    </>
+    </div>
   );
 };

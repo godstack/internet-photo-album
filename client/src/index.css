@@ -128,7 +128,7 @@ input {
 
 input:focus {
   outline: none;
-  border-bottom: 2px solid #ffeb3b;
+  border-bottom: 2px solid #3ba0ff;
 }
 
 label {
@@ -138,7 +138,7 @@ label {
 }
 
 input:focus + label {
-  color: #ffeb3b;
+  color: #3ba0ff;
 }
 
 .placeholder {
@@ -151,6 +151,7 @@ input:focus + label {
   padding: 100px 20px 0;
   min-height: 100vh;
   background: #edeef0;
+  position: relative;
 }
 
 button,

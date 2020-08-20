@@ -36,9 +36,15 @@ export const RegisterPage = () => {
   };
 
   return (
-    <>
+    <div className='auth-page'>
       {loading && <Loader />}
       <div className='form-container'>
+        <div className='form__header'>
+          <h3 className='form__type'>Register Account</h3>
+          <NavLink className='form__redirect' to='/login'>
+            Login
+          </NavLink>
+        </div>
         <div className='input-field'>
           <input
             type='text'
@@ -69,21 +75,14 @@ export const RegisterPage = () => {
           <label htmlFor='password'>Password</label>
         </div>
 
-        <div className='buttons'>
-          <button
-            disabled={loading}
-            className='btn btn-register'
-            onClick={registerHandler}
-          >
-            Register
-          </button>
-        </div>
-        <div className='form-link'>
-          <NavLink to='/login'>
-            Already have an account? Go to Login page
-          </NavLink>
-        </div>
+        <button
+          disabled={loading}
+          className='btn-auth'
+          onClick={registerHandler}
+        >
+          Register
+        </button>
       </div>
-    </>
+    </div>
   );
 };
