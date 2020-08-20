@@ -1,7 +1,0 @@
-{
-  "port": 5000,
-  "mongoUri": "mongodb://godlexa:1qwerty1@ds111124.mlab.com:11124/heroku_z2h9xrgm",
-  "jwtSecret": "oleksiiproject",
-
-  "baseUrl": "http://localhost:5000"
-}
