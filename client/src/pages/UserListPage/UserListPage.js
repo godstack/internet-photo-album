@@ -114,6 +114,8 @@ export const UserListPage = ({ userListType }) => {
           {userList?.map(user => (
             <UserItem user={user} key={user.nickname} request={request} />
           ))}
+
+          {!userList?.length && <p className='userlist__message'>Empty</p>}
         </div>
       </div>
 

@@ -16,7 +16,13 @@
 }
 
 .settings-btn {
+  border: 3px solid rgb(152, 44, 224);
   margin: 30px 0;
+}
+
+.settings-btn:hover {
+  background: rgb(152, 44, 224);
+  color: white;
 }
 
 .settings input {

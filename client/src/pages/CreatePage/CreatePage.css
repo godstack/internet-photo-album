@@ -7,11 +7,6 @@
   border-radius: 10px;
 }
 
-.btn-add {
-  background-color: rgb(34, 167, 22);
-  margin: 0 auto;
-}
-
 textarea {
   resize: vertical;
 }

@@ -50,7 +50,7 @@ export const Pagination = ({ currentPage, pagesCount, setPage }) => {
   return (
     <div
       className='pagination-wrapper'
-      style={pagesCount === 0 ? { display: 'none' } : null}
+      style={pagesCount < 2 ? { display: 'none' } : null}
     >
       <div className='pagination'>
         <button

@@ -22,20 +22,22 @@ export const Navigation = () => {
         <i className='fas fa-user-circle'></i>
         <div className='submenu'>
           <NavLink to={`/user/${auth.user.nickname}`} className='submenu__item'>
-            <i className='far fa-id-card'></i> Profile
+            <i className='far fa-id-card'></i> <span>Profile</span>
           </NavLink>
           <NavLink to='/addpost' className='submenu__item'>
-            <i className='far fa-plus-square'></i> Add Photo
+            <i className='far fa-plus-square'></i>
+            <span>Add Photo</span>
           </NavLink>
           <NavLink to='/settings' className='submenu__item'>
-            <i className='fas fa-cog'></i> Settings
+            <i className='fas fa-cog'></i>
+            <span>Settings</span>
           </NavLink>
           <a
             href='/'
             onClick={logoutHandler}
             className='submenu__item logout__item'
           >
-            <i className='fas fa-sign-out-alt'></i> Logout
+            <i className='fas fa-sign-out-alt'></i> <span>Logout</span>
           </a>
         </div>
       </div>

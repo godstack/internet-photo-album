@@ -82,6 +82,8 @@
   }
 
   .profile-info__nickname {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
+      sans-serif;
     font-weight: lighter;
     font-size: 2rem;
   }

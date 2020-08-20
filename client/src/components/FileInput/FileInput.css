@@ -5,6 +5,16 @@
   justify-content: center;
 }
 
+.btn-add {
+  border: 3px solid rgb(34, 167, 22);
+  font-weight: bold;
+}
+
+.btn-add:hover {
+  background: rgb(34, 167, 22);
+  color: white;
+}
+
 .grey-input .form-group {
   padding: 1em;
   margin: 1em;
@@ -34,6 +44,7 @@
   display: block;
   font-size: 20px;
   padding-bottom: 16px;
+  margin-top: 40px;
 }
 .grey-input .label i,
 .grey-input .label .title {
@@ -52,4 +63,5 @@
   text-align: center;
   font-size: 1.2rem;
   margin-top: 20px;
+  overflow: hidden;
 }
