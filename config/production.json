@@ -1,6 +1,6 @@
 {
   "port": 5000,
-  "mongoUri": "mongodb+srv://godlexa:1mongoose1@cluster0.8m6yx.azure.mongodb.net/app?retryWrites=true&w=majority",
+  "mongoUri": "mongodb://godlexa:1qwerty1@ds111124.mlab.com:11124/heroku_z2h9xrgm",
   "jwtSecret": "oleksiiproject",
 
   "baseUrl": "http://localhost:5000"

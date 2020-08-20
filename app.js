@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 
-const PORT = config.get('port') || 5000;
+const PORT = process.env.PORT || config.get('port') || 5000;
 
 app.use(express.json({ extended: true }));
 
