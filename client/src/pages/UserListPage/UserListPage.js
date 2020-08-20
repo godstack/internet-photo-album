@@ -103,7 +103,7 @@ export const UserListPage = ({ userListType }) => {
           />
           <label htmlFor='email'>Enter Nickname</label>
         </div>
-        <button className='btn' onClick={handleSearch}>
+        <button className='btn user-list__search' onClick={handleSearch}>
           Search
         </button>
       </div>

@@ -2,13 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgb(121, 121, 121);
+
   padding: 10px 20px;
   position: fixed;
   width: 100vw;
   top: 0;
   z-index: 10;
-  background-color: #4a76a8;
+  background: white;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0);
+  box-shadow: 0 0 5px rgba(0, 0, 0);
 }
 
 .headerlogo {

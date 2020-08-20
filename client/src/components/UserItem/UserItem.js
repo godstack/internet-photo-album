@@ -28,8 +28,8 @@ export const UserItem = ({ user, request }) => {
       return (
         <button
           className={classNames(
-            'user-item__btn',
             'btn',
+            'user-item__btn',
             isFollowing ? 'btn-unfollow' : 'btn-follow'
           )}
           onClick={handleFollow}
@@ -43,20 +43,20 @@ export const UserItem = ({ user, request }) => {
   return (
     <div className='user-item'>
       <NavLink to={`/user/${user.nickname}`}>
-        {user.profilePhoto ? (
-          <img
-            className='user-item__image'
-            src={`data:image/jpeg;base64,${Buffer.from(
-              user.profilePhoto,
-              'binary'
-            ).toString('base64')}`}
-            alt='profile'
-          />
-        ) : (
-          <div className='user-item__image'>
+        <div className='user-item__wrapper'>
+          {user.profilePhoto ? (
+            <img
+              className='user-item__image'
+              src={`data:image/jpeg;base64,${Buffer.from(
+                user.profilePhoto,
+                'binary'
+              ).toString('base64')}`}
+              alt='profile'
+            />
+          ) : (
             <i className='far fa-eye-slash'></i>
-          </div>
-        )}
+          )}
+        </div>
       </NavLink>
       <NavLink to={`/user/${user.nickname}`}>
         <span className='user-item__nickname'>{user.nickname}</span>

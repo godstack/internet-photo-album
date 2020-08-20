@@ -15,8 +15,8 @@ router.post(
     check('nickname', 'Wrong nickname')
       .exists()
       .withMessage('nickname is required')
-      .isLength({ min: 3, max: 15 })
-      .withMessage('wrong nickname length (From 3 to 15 characters)'),
+      .isLength({ min: 3, max: 14 })
+      .withMessage('wrong nickname length (From 3 to 14 characters)'),
 
     check('password')
       .isLength({

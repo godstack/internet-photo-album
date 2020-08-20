@@ -17,7 +17,7 @@
   margin: 50px auto 0;
   padding: 20px;
   background-color: white;
-  box-shadow: 0 0 15px black;
+  box-shadow: 0 0 5px black;
   border-radius: 5px;
 }
 
@@ -59,6 +59,11 @@ a.form__redirect {
   line-height: inherit;
   text-transform: uppercase;
   cursor: pointer;
+  transition: 0.5s background-color ease;
+}
+
+.btn-auth:hover {
+  background: #2d5ca7;
 }
 
 .form-container input {
@@ -88,5 +93,9 @@ a.form__redirect {
 
   .form__type {
     font-size: 1.4rem;
+  }
+
+  .form-container {
+    box-shadow: 0 0 15px black;
   }
 }

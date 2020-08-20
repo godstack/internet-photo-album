@@ -15,8 +15,7 @@
 }
 
 .nav__item:hover {
-  border-radius: 4px;
-  color: white;
+  color: rgb(0, 32, 102, 0.5);
 }
 
 .topmenu {
@@ -29,9 +28,8 @@
 }
 
 .submenu__item:hover {
-  background-color: rgb(9, 139, 139);
-  border-radius: 4px;
-  color: white;
+  background: rgb(224, 224, 224);
+  border-radius: 5px;
 }
 
 .submenu__item {
@@ -39,23 +37,19 @@
 }
 
 .submenu {
-  border: 1px dashed black;
-
-  border-radius: 5px;
   display: none;
+  border-radius: 5px;
   position: absolute;
-  background-color: white;
+  background: white;
+  box-shadow: 0 0 5px black;
   top: 100%;
-  right: 0;
+  left: -50px;
   width: 150px;
-  z-index: 10;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
+  z-index: 3;
 }
 
-a:visited {
+a:visited,
+a:link {
   color: black;
 }
 

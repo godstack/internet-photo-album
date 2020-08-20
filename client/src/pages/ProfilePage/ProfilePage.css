@@ -55,18 +55,6 @@
   padding-bottom: 16px;
 }
 
-.btn-follow {
-  background-color: #0095f6;
-  padding: 5px 30px;
-  margin-left: 50px;
-}
-
-.btn-unfollow {
-  background-color: #db0e07;
-  padding: 5px 30px;
-  margin-left: 50px;
-}
-
 .profile-info__wrapper-1 {
   display: flex;
   justify-content: flex-start;
@@ -79,6 +67,8 @@
 
 .profile-info__follow-btn {
   font-size: 1rem;
+  padding: 5px 30px;
+  margin-left: 50px;
 }
 
 @media screen and (min-width: 550px) {

@@ -9,31 +9,32 @@
   font-weight: bold;
   font-size: 1rem;
   margin-left: 20px;
+  overflow: hidden;
 }
 
-.user-item__image {
+.user-item__wrapper {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-.user-item__image i {
-  font-size: 40px;
+.user-item__image {
+  width: auto;
+  height: 100%;
+}
+
+.user-item__wrapper i {
+  font-size: 25px;
 }
 
 .user-item__btn {
   margin-left: auto;
-  font-size: 1rem;
-}
-
-.btn-follow {
-  background-color: #0095f6;
-  padding: 5px 30px;
-}
-
-.btn-unfollow {
-  background-color: #db0e07;
-  padding: 5px 30px;
+  font-size: 0.8rem;
 }
 
 @media screen and (min-width: 500px) {
@@ -42,7 +43,7 @@
   }
 
   .user-item__btn {
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin-left: auto;
   }
 }
