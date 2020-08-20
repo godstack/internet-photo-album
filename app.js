@@ -3,6 +3,7 @@ const config = require('config');
 const app = express();
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 const PORT = config.get('port') || 5000;
 
@@ -23,6 +24,14 @@ app.use('/api/post/', require('./routes/posts.routes'));
 app.use('/api/user/', require('./routes/user.routes'));
 
 app.use('/api/users/', require('./routes/users.routes'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 async function start() {
   try {
