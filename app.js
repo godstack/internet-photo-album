@@ -26,16 +26,12 @@ app.use('/api/user/', require('./routes/user.routes'));
 app.use('/api/users/', require('./routes/users.routes'));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/', express.static(path.join(__dirname, 'client', 'build')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
+  app.use(express.static('client/build'));
 }
 
 async function start() {
   try {
-    await mongoose.connect(config.get('mongoUri'), {
+    await mongoose.connect(process.env.MONGODB_URI || config.get('mongoUri'), {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
