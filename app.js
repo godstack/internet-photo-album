@@ -25,8 +25,12 @@ app.use('/api/user/', require('./routes/user.routes'));
 
 app.use('/api/users/', require('./routes/users.routes'));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+if (process.env.NODE.ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
 async function start() {
