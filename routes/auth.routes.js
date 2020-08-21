@@ -53,7 +53,11 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const user = new User({ email, nickname, password: hashedPassword });
+      const user = new User({
+        email: email.toLowerCase(),
+        nickname: nickname.toLowerCase(),
+        password: hashedPassword
+      });
 
       await user.save();
 
@@ -93,7 +97,9 @@ router.post(
           .json({ errors: errors.array(), message: 'Wrong login data' });
       }
 
-      const { email, password } = req.body;
+      let { email, password } = req.body;
+
+      email = email.toLowerCase();
 
       const regexForEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

@@ -15,12 +15,12 @@
 }
 
 .settings .image-field {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: black;
-  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.settings .input-field {
+  margin-top: 30px;
 }
 
 .settings-btn {
@@ -40,10 +40,5 @@
 @media screen and (min-width: 700px) {
   .settings {
     width: 600px;
-  }
-
-  .image-field {
-    flex-direction: row;
-    justify-content: space-evenly;
   }
 }

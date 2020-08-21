@@ -97,6 +97,7 @@ export const SettingsPage = () => {
   }, [message, clearError, error, auth, history]);
 
   const submitChanges = async () => {
+    debugger;
     const data = await request(
       '/api/user/settings/change',
       'PUT',
@@ -106,9 +107,12 @@ export const SettingsPage = () => {
       }
     );
 
-    setUser({ ...user, ...data.new });
+    if (data.new) {
+      setUser({ ...user, ...data.new });
 
-    auth.login({ ...auth.user, nickname: data.new.nickname });
+      auth.login({ ...auth.user, nickname: data.new.nickname });
+    }
+
     message(data.message);
   };
 

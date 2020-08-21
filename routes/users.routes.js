@@ -8,7 +8,11 @@ const { find } = require('../models/Post');
 // /api/users
 router.get('/get', auth, async (req, res) => {
   try {
-    const { page, search } = req.query;
+    const { page } = req.query;
+
+    let { search } = req.query;
+
+    search = search.toLowerCase();
 
     const PAGE_SIZE = 5;
     const skip = (page - 1) * PAGE_SIZE;

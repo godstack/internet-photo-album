@@ -153,7 +153,9 @@ router.get('/:nickname/followers', auth, async (req, res) => {
   try {
     const { nickname } = req.params;
 
-    const { search } = req.query;
+    let { search } = req.query;
+
+    search = search.toLowerCase();
 
     const { page } = req.query;
 
@@ -176,7 +178,9 @@ router.get('/:nickname/following', auth, async (req, res) => {
   try {
     const { nickname } = req.params;
 
-    const { search } = req.query;
+    let { search } = req.query;
+
+    search = search.toLowerCase();
 
     const { page } = req.query;
     const result = await getFollowersOrFollowing(
@@ -245,7 +249,11 @@ router.post('/settings/photo', auth, async (req, res) => {
 
 router.put('/settings/change', auth, async (req, res) => {
   try {
-    const { nickname, email } = req.body;
+    let { nickname, email } = req.body;
+
+    nickname = nickname.toLowerCase();
+
+    email = email.toLowerCase();
 
     const regexForEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
