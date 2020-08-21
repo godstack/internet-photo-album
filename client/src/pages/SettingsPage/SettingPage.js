@@ -37,7 +37,7 @@ export const SettingsPage = () => {
     setUser(data);
     setForm({ ...form, nickname: data.nickname, email: data.email });
     setLoading(false);
-  }, [auth.user.token, form, request]);
+  }, []);
 
   const handleChange = async e => {
     const { name, value, files } = e.target;
