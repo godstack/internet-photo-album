@@ -47,7 +47,7 @@ export const PostCard = props => {
     <>
       {loading && <Loader />}
       <div className='post-card'>
-        <NavLink className='post-card__nickname' to={`user/${props.postedBy}`}>
+        <NavLink className='post-card__nickname' to={`/user/${props.postedBy}`}>
           {props.postedBy}
         </NavLink>
         <div
