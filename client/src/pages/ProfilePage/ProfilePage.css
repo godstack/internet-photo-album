@@ -7,10 +7,10 @@
   border-top: 1px solid grey;
   margin: 30px auto 0;
   width: 90%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
 }
 
 .clickable {
@@ -100,5 +100,11 @@
       sans-serif;
     font-weight: lighter;
     font-size: 2rem;
+  }
+
+  .profile-info__posts,
+  .profile-info__followers,
+  .profile-info__following {
+    font-size: 1.7rem;
   }
 }

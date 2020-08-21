@@ -168,7 +168,7 @@ input:focus + label {
 }
 
 .main {
-  padding: 100px 20px 0;
+  padding: 100px 20px 30px;
   min-height: 100vh;
   background: rgba(226, 226, 226, 0.2);
   background: linear-gradient(

@@ -113,7 +113,7 @@ export const ProfilePage = props => {
         <div className='profile-info__follow-btn'>{showFollowButton()}</div>
 
         <div className='profile-info__posts'>{postsCount} posts</div>
-        <div className='profile-info__followers'>
+        <div className='profile-info__followers '>
           <NavLink
             to={`/user/${nickname}/followers`}
             style={{ color: 'black' }}

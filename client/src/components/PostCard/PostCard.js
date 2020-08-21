@@ -50,9 +50,15 @@ export const PostCard = props => {
         <NavLink className='post-card__nickname' to={`user/${props.postedBy}`}>
           {props.postedBy}
         </NavLink>
-        <div className='placeholder'>
-          <img src={`data:image/jpeg;base64,${base64data}`} alt='post' />
-        </div>
+        <div
+          className='post-card__img'
+          style={{
+            background: `url("data:image/jpeg;base64,${base64data}")`,
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat'
+          }}
+        ></div>
         <div className='post-card__additional'>
           <button
             onClick={handleLikePost}

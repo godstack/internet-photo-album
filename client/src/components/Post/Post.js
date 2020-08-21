@@ -14,11 +14,15 @@ export const Post = props => {
   };
 
   return (
-    <div className='post' onClick={redirectToPostPage}>
-      <div className='placeholder'>
-        <img src={`data:image/jpeg;base64,${base64data}`} alt='post' />
-      </div>
-      <div></div>
-    </div>
+    <div
+      className='post'
+      onClick={redirectToPostPage}
+      style={{
+        background: `url("data:image/jpeg;base64,${base64data}")`,
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat'
+      }}
+    ></div>
   );
 };

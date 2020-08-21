@@ -6,18 +6,11 @@
   box-shadow: 0 0 15px grey;
 }
 
-.post-card img {
-  max-width: fit-content;
-  margin: auto;
-}
-
-.post-card .placeholder {
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.post-card__img {
+  background-color: #fff;
+  padding-bottom: 100%;
+  width: 100%;
+  height: 0;
 }
 
 .post-card__additional {
