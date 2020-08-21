@@ -1,12 +1,9 @@
 import React from 'react';
 import './ProfileImage.css';
 
-export const ProfileImage = ({ photo, imageSize }) => {
+export const ProfileImage = ({ photo }) => {
   return (
-    <div
-      className='profile-image-wrapper'
-      style={{ width: `${imageSize + 15}px`, height: `${imageSize + 15}px` }}
-    >
+    <div className='profile-image-wrapper'>
       {photo ? (
         <img
           className='profile-image'

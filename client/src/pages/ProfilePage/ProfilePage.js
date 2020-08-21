@@ -43,7 +43,6 @@ export const ProfilePage = props => {
       return (
         <button
           className={classNames(
-            'profile-info__follow-btn',
             'btn',
             isFollowing ? 'btn-unfollow' : 'btn-follow'
           )}
@@ -107,36 +106,29 @@ export const ProfilePage = props => {
   return (
     <div className='profile-page'>
       <header className='profile-page__header'>
-        <ProfileImage
-          photo={user.profilePhoto}
-          imageSize={window.innerWidth > 550 ? 150 : 60}
-        />
+        <div className='profile-info__img'>
+          <ProfileImage photo={user.profilePhoto} />
+        </div>
+        <h2 className='profile-info__nickname'>{user?.nickname}</h2>
+        <div className='profile-info__follow-btn'>{showFollowButton()}</div>
 
-        <section className='profile-info'>
-          <div className='profile-info__wrapper-1'>
-            <h2 className='profile-info__nickname'>{user?.nickname}</h2>
-            {showFollowButton()}
-          </div>
-          <ul className='profile-info__amount'>
-            <li>{postsCount} posts</li>
-            <li>
-              <NavLink
-                to={`/user/${nickname}/followers`}
-                style={{ color: 'black' }}
-              >
-                {user?.followers?.length} followers
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={`/user/${nickname}/following`}
-                style={{ color: 'black' }}
-              >
-                {user?.following?.length} following
-              </NavLink>
-            </li>
-          </ul>
-        </section>
+        <div className='profile-info__posts'>{postsCount} posts</div>
+        <div className='profile-info__followers'>
+          <NavLink
+            to={`/user/${nickname}/followers`}
+            style={{ color: 'black' }}
+          >
+            {user?.followers?.length} followers
+          </NavLink>
+        </div>
+        <div className='profile-info__following'>
+          <NavLink
+            to={`/user/${nickname}/following`}
+            style={{ color: 'black' }}
+          >
+            {user?.following?.length} following
+          </NavLink>
+        </div>
       </header>
 
       <div className='profile-posts'>

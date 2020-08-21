@@ -34,7 +34,8 @@
 
 .user-item__btn {
   margin-left: auto;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  padding: 3px 6px;
 }
 
 @media screen and (min-width: 500px) {
@@ -45,5 +46,6 @@
   .user-item__btn {
     font-size: 1rem;
     margin-left: auto;
+    padding: 5px 10px;
   }
 }

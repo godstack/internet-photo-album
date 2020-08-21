@@ -15,10 +15,6 @@
   color: white;
 }
 
-.grey-input .form-group {
-  padding: 1em;
-  margin: 1em;
-}
 .grey-input input[type='file'] {
   outline: 0;
   opacity: 0;
@@ -62,6 +58,6 @@
 .selected-file-name {
   text-align: center;
   font-size: 1.2rem;
-  margin-top: 20px;
+  margin: 20px 0;
   overflow: hidden;
 }

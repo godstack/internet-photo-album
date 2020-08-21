@@ -8,13 +8,10 @@ import { AuthContext } from '../../context/AuthContext';
 import { FileInput } from '../../components/FileInput/FileInput';
 import imageCompression from 'browser-image-compression';
 import './SettingsPage.css';
-import { ProfileImage } from '../../components/ProfileImage/ProfileImage';
 
 export const SettingsPage = () => {
   const [user, setUser] = useState(null);
   const [disabled, setDisabled] = useState(true);
-
-  const [file, setFile] = useState(null);
 
   const [form, setForm] = useState({ nickname: '', email: '' });
 
@@ -40,7 +37,7 @@ export const SettingsPage = () => {
     setUser(data);
     setForm({ ...form, nickname: data.nickname, email: data.email });
     setLoading(false);
-  }, []);
+  }, [auth.user.token, form, request]);
 
   const handleChange = async e => {
     const { name, value, files } = e.target;
@@ -120,48 +117,48 @@ export const SettingsPage = () => {
   }
 
   return (
-    <div className='settings'>
-      <div className='image-field'>
-        <ProfileImage photo={user?.profilePhoto} imageSize={150} />
+    <div className='settings-page'>
+      <div className='settings'>
+        <div className='image-field'>
+          <FileInput
+            loading={loading}
+            uploadHandler={uploadHandler}
+            handleChange={handleChange}
+            title={'New profile image'}
+            filename={form?.file?.name}
+          />
+        </div>
 
-        <FileInput
-          loading={loading}
-          uploadHandler={uploadHandler}
-          handleChange={handleChange}
-          title={'Profile image'}
-          filename={form?.file?.name}
-        />
+        <div className='input-field'>
+          <input
+            type='text'
+            name='nickname'
+            placeholder='Nickname'
+            value={form.nickname}
+            onChange={handleChange}
+          />
+          <label htmlFor='nickname'>Nickname</label>
+        </div>
+
+        <div className='input-field'>
+          <input
+            type='text'
+            name='email'
+            placeholder='Email'
+            value={form.email}
+            onChange={handleChange}
+          />
+          <label htmlFor='email'>Email</label>
+        </div>
+
+        <button
+          className='btn settings-btn'
+          disabled={disabled}
+          onClick={submitChanges}
+        >
+          Apply Changes
+        </button>
       </div>
-
-      <div className='input-field'>
-        <input
-          type='text'
-          name='nickname'
-          placeholder='Nickname'
-          value={form.nickname}
-          onChange={handleChange}
-        />
-        <label htmlFor='nickname'>Nickname</label>
-      </div>
-
-      <div className='input-field'>
-        <input
-          type='text'
-          name='email'
-          placeholder='Email'
-          value={form.email}
-          onChange={handleChange}
-        />
-        <label htmlFor='email'>Email</label>
-      </div>
-
-      <button
-        className='btn settings-btn'
-        disabled={disabled}
-        onClick={submitChanges}
-      >
-        Apply Changes
-      </button>
     </div>
   );
 };

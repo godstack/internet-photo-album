@@ -18,22 +18,37 @@
 }
 
 .profile-page__header {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid:
+    'img img img nickname nickname nickname'
+    'img img img btn btn btn'
+    'posts posts followers followers following following';
+  row-gap: 10px;
 }
 
-.profile-info {
-  height: 100%;
-  flex-grow: 1;
+.profile-info__img {
+  grid-area: img;
 }
 
-.profile-info__amount {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  font-size: 1rem;
+.profile-info__posts {
+  grid-area: posts;
+  justify-self: center;
+}
+
+.profile-info__followers {
+  grid-area: followers;
+  justify-self: center;
+}
+
+.profile-info__following {
+  grid-area: following;
+  justify-self: center;
 }
 
 .profile-info__nickname {
+  grid-area: nickname;
+
   font-weight: bold;
   font-size: 1.3rem;
 }
@@ -55,26 +70,25 @@
   padding-bottom: 16px;
 }
 
-.profile-info__wrapper-1 {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 30px;
-}
-
 .profile__pagination input {
   color: black;
 }
 
 .profile-info__follow-btn {
-  font-size: 1rem;
-  padding: 5px 30px;
-  margin-left: 50px;
+  grid-area: btn;
+  font-size: 0.7rem;
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 500px) {
   .profile__pagination {
     margin: 20px auto;
     width: fit-content;
+  }
+  .profile-page__header {
+    grid:
+      'img nickname nickname nickname'
+      'img btn btn btn'
+      'posts  followers following';
   }
 
   .profile-info__follow-btn {
@@ -86,9 +100,5 @@
       sans-serif;
     font-weight: lighter;
     font-size: 2rem;
-  }
-
-  .profile-info__amount {
-    font-size: 1.3rem;
   }
 }

@@ -7,6 +7,8 @@
   align-items: center;
   background-color: rgba(168, 153, 153, 0.5);
   overflow: hidden;
+  width: 60px;
+  height: 60px;
 }
 
 .profile-image {
@@ -15,5 +17,17 @@
 }
 
 .no-photo__p {
+  font-size: 0.6rem;
   text-align: center;
+}
+
+@media screen and (min-width: 500px) {
+  .profile-image-wrapper {
+    width: 165px;
+    height: 165px;
+  }
+
+  .no-photo__p {
+    font-size: 1rem;
+  }
 }
