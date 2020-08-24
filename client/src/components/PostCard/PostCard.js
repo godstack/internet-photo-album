@@ -43,6 +43,21 @@ export const PostCard = props => {
     setPost(data);
   };
 
+  const handleDeletePost = async () => {
+    const data = await request(
+      '/api/post/delete',
+      'DELETE',
+      { postId: post._id },
+      {
+        authorization: `Bearer ${auth.user.token}`
+      }
+    );
+
+    message(data.message);
+
+    history.push(`user/${props.postedBy}`);
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -50,6 +65,13 @@ export const PostCard = props => {
         <NavLink className='post-card__nickname' to={`/user/${props.postedBy}`}>
           {props.postedBy}
         </NavLink>
+
+        {auth.user.nickname === props.postedBy ? (
+          <i
+            className='far fa-trash-alt post-card__delete'
+            onClick={handleDeletePost}
+          ></i>
+        ) : null}
         <section className='post-card__img-wrapper'>
           <div
             className='post-card__img'

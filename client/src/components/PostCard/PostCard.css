@@ -41,6 +41,12 @@
   font-weight: bold;
 }
 
+.post-card__delete {
+  float: right;
+  color: rgb(211, 24, 24);
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   .post-card {
     width: 450px;

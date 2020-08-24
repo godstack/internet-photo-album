@@ -48,6 +48,31 @@ router.post('/upload', auth, async (req, res) => {
   }
 });
 
+//api/post/delete
+
+router.delete('/delete', auth, async (req, res) => {
+  try {
+    const { userId } = req.user;
+
+    const { postId } = req.body;
+
+    const user = await User.findById(userId);
+
+    user.likedPosts = user.likedPosts.filter(el => !el.equals(postId));
+    user.posts = user.posts.filter(el => !el.equals(postId));
+
+    await user.save();
+
+    const post = await Post.findByIdAndDelete(postId);
+
+    res.json({ message: 'Deleted successfully' });
+  } catch (e) {
+    res
+      .status(500)
+      .json({ message: e.message || 'Something went wrong, try again' });
+  }
+});
+
 // /api/post/like
 
 router.put('/like', auth, async (req, res) => {
