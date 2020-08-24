@@ -47,13 +47,21 @@
   margin: 70px 0 30px;
 }
 
+.users-search label {
+  font-size: 0.9rem;
+}
+
+.users-search input {
+  font-size: 0.9rem;
+}
+
 .users-search .input-field {
   width: 60%;
 }
 
 .users-search button {
   width: 30%;
-  font-size: 1rem;
+  font-size: 0.8rem;
   padding: 3px 7px;
 }
 
@@ -75,20 +83,27 @@
   border: 2px solid brown;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 700px) {
   .users-search button {
-    font-size: 1.3remrem;
+    font-size: 1.3rem;
     padding: 5px 10px;
   }
 
   .users-search {
     width: 500px;
     padding: 10px 30px 20px;
+    font-size: 0.8rem;
   }
-}
 
-@media screen and (min-width: 700px) {
   .userlist {
     width: 500px;
+  }
+
+  .users-search label {
+    font-size: 1.3rem;
+  }
+
+  .users-search input {
+    font-size: 1.3rem;
   }
 }

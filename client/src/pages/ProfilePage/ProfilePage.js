@@ -73,6 +73,7 @@ export const ProfilePage = props => {
       }
 
       setPosts(data.posts);
+
       setUser(data.user);
       setPagesCount(data.pagesCount);
       setPostsCount(data.postsCount);
@@ -115,7 +116,7 @@ export const ProfilePage = props => {
         <div className='profile-info__posts'>{postsCount} posts</div>
         <div className='profile-info__followers '>
           <NavLink
-            to={`/user/${nickname}/followers`}
+            to={`/user/${user?.nickname}/followers`}
             style={{ color: 'black' }}
           >
             {user?.followers?.length} followers
@@ -123,7 +124,7 @@ export const ProfilePage = props => {
         </div>
         <div className='profile-info__following'>
           <NavLink
-            to={`/user/${nickname}/following`}
+            to={`/user/${user?.nickname}/following`}
             style={{ color: 'black' }}
           >
             {user?.following?.length} following

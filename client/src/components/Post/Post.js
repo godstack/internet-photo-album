@@ -14,15 +14,17 @@ export const Post = props => {
   };
 
   return (
-    <div
-      className='post'
-      onClick={redirectToPostPage}
-      style={{
-        background: `url("data:image/jpeg;base64,${base64data}")`,
-        backgroundPosition: 'center',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat'
-      }}
-    ></div>
+    <div className='post-wrapper'>
+      <div
+        className='post'
+        onClick={redirectToPostPage}
+        style={{
+          background: `url("data:image/jpeg;base64,${base64data}")`,
+          backgroundPosition: 'center',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat'
+        }}
+      ></div>
+    </div>
   );
 };

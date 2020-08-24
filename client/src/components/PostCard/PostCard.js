@@ -50,32 +50,33 @@ export const PostCard = props => {
         <NavLink className='post-card__nickname' to={`/user/${props.postedBy}`}>
           {props.postedBy}
         </NavLink>
-        <div
-          className='post-card__img'
-          style={{
-            background: `url("data:image/jpeg;base64,${base64data}")`,
-            backgroundPosition: 'center',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat'
-          }}
-        ></div>
+        <div className='post-card__img-wrapper'>
+          <div
+            className='post-card__img'
+            style={{
+              background: `url("data:image/jpeg;base64,${base64data}")`,
+              backgroundPosition: 'center',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></div>
+        </div>
         <div className='post-card__additional'>
           <button
             onClick={handleLikePost}
             className='post-card__like'
             disabled={loading}
           >
+            {post.likes.length}{' '}
             {!!post.likes.find(el => el === auth.user.userId) ? (
               <i className='fas fa-heart'></i>
             ) : (
               <i className='far fa-heart'></i>
             )}
           </button>
+
           <div className='post-card__additional-p'>
-            Liked by {post.likes.length} people
-          </div>
-          <div className='post-card__additional-p'>
-            Creation date: {new Date(post.date).toLocaleDateString()}
+            {new Date(post.date).toLocaleDateString()}
           </div>
         </div>
       </div>

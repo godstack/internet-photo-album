@@ -113,14 +113,23 @@ async function getFollowersOrFollowing(nickname, page, search, type) {
   const user = await User.findOne({ nickname });
 
   const userList = [];
+  const deletedUsers = [];
 
   for (let i = 0; i < user[type].length; i++) {
     const item = await User.findById(user[type][i]);
 
-    if (item.nickname.includes(search)) {
+    if (item && item.nickname.includes(search)) {
       userList.push(user[type][i]);
+    } else {
+      deletedUsers.push(user[type][i]);
     }
   }
+
+  for (let i = 0; i < deletedUsers.length; i++) {
+    user[type] = user[type].filter(el => el !== deletedUsers[i]);
+  }
+
+  await user.save();
 
   const count = userList.length;
   let pagesCount = Math.ceil(count / PAGE_SIZE);
