@@ -11,7 +11,7 @@ export class Maps extends React.Component {
       <Map
         google={this.props.google}
         zoom={15}
-        style={mapStyles}
+        // style={mapStyles}
         initialCenter={{ lat: 9.761927, lng: 79.95244 }}
       />
     );
@@ -19,5 +19,5 @@ export class Maps extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCxf8Q5Ca45XXqZLGWi3lDakbrE9tFVJB8'
+  apiKey: process.env.REACT_APP_GOOGLE_KEY
 })(Maps);

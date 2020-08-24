@@ -1,8 +1,9 @@
 import React from 'react';
 import './InfoPage.css';
-import Maps from '../../components/Maps/Maps';
+
 import { Slider } from '../../components/Slider/Slider';
 import { InfoBlock } from '../../components/InfoBlock/InfoBlock';
+import { Maps } from '../../components/Maps/Maps';
 
 export const InfoPage = () => {
   const images = [
@@ -26,7 +27,9 @@ export const InfoPage = () => {
         />
         <InfoBlock icon='fab fa-instagram' title='Instagram' text='godlexa' />
       </div>
-      <div className='info-page__map'>{/* <Maps/> */}</div>
+      {/* <div className='info-page__map'>
+        <Maps />
+      </div> */}
       <div className='info-page__address'>
         <h3 className='address__h3'>OUR ADDRESS</h3>
         <ul className='address__ul'>
