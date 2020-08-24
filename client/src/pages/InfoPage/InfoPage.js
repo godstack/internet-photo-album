@@ -3,7 +3,6 @@ import './InfoPage.css';
 
 import { Slider } from '../../components/Slider/Slider';
 import { InfoBlock } from '../../components/InfoBlock/InfoBlock';
-import { Maps } from '../../components/Maps/Maps';
 
 export const InfoPage = () => {
   const images = [
@@ -14,10 +13,10 @@ export const InfoPage = () => {
   ];
 
   return (
-    <div className='info-page'>
+    <section className='info-page'>
       <h2 className='info-page__title'>Contact Trembola</h2>
       <p className='info-page__tagline'>Get in touch with us</p>
-      <div className='info-page__contacts'>
+      <section className='info-page__contacts'>
         <InfoBlock icon='fas fa-at' title='Email' text='trembola@gmail.com' />
         <InfoBlock icon='fas fa-phone' title='Phone' text='555-555' />
         <InfoBlock
@@ -26,22 +25,29 @@ export const InfoPage = () => {
           text='godlexa'
         />
         <InfoBlock icon='fab fa-instagram' title='Instagram' text='godlexa' />
-      </div>
-      {/* <div className='info-page__map'>
-        <Maps />
-      </div> */}
-      <div className='info-page__address'>
-        <h3 className='address__h3'>OUR ADDRESS</h3>
-        <ul className='address__ul'>
-          <li>Vinnytsia</li>
-          <li>Pirogova street</li>
-          <li>42 House</li>
-        </ul>
-      </div>
-      <div className='info-page__office'>
+      </section>
+
+      <section className='info-page__address'>
+        <h3 className='address__header'>OUR ADDRESS</h3>
+        <p className='address_p'>21000, Vinnitsya, Soborna Street</p>
+      </section>
+
+      <section className='info-page__office'>
         <h4 className='office__header'>Our Office</h4>
         <Slider images={images} />
-      </div>
-    </div>
+      </section>
+
+      <section className='info-page__map'>
+        <iframe
+          width='100%'
+          height='600'
+          frameborder='0'
+          scrolling='no'
+          marginheight='0'
+          marginwidth='0'
+          src='https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Vinnytsia,%20Vinnytsia%20Oblast+(Trembola%20office)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed'
+        ></iframe>
+      </section>
+    </section>
   );
 };

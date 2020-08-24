@@ -91,9 +91,9 @@ export const UserListPage = ({ userListType }) => {
   }
 
   return (
-    <div className='user-list-wrapper'>
-      <div className='users-search'>
-        <div className='input-field'>
+    <section className='user-list-wrapper'>
+      <section className='users-search'>
+        <section className='input-field'>
           <input
             type='text'
             name='nicknameToSearch'
@@ -102,28 +102,28 @@ export const UserListPage = ({ userListType }) => {
             onChange={e => setNicknameToSearch(e.target.value)}
           />
           <label htmlFor='email'>Enter Nickname</label>
-        </div>
+        </section>
         <button className='btn user-list__search' onClick={handleSearch}>
           Search
         </button>
-      </div>
+      </section>
 
-      <div className='userlist'>
+      <section className='userlist'>
         <header className='userlist__header'>{userListType}</header>
-        <div className='userlist__list'>
+        <section className='userlist__list'>
           {userList?.map(user => (
             <UserItem user={user} key={user.nickname} request={request} />
           ))}
 
           {!userList?.length && <p className='userlist__message'>Empty</p>}
-        </div>
-      </div>
+        </section>
+      </section>
 
       <Pagination
         currentPage={page}
         pagesCount={pagesCount}
         setPage={setPage}
       />
-    </div>
+    </section>
   );
 };

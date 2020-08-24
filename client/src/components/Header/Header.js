@@ -9,9 +9,9 @@ export const Header = () => {
 
   return (
     <header className='App-header'>
-      <div className='header__section'>
+      <section className='header__section'>
         <div className='header__item headerlogo'>Internet Photo Album</div>
-      </div>
+      </section>
       {auth.isAuthenticated && <Navigation />}
     </header>
   );

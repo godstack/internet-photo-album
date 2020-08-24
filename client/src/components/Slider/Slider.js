@@ -18,25 +18,25 @@ export const Slider = props => {
   };
 
   return (
-    <div className='slider'>
+    <section className='slider'>
       <button
         onClick={prevSlideHandler}
         className='slider__btn slider__btn-prev'
       >
         <i className='fas fa-arrow-circle-left'></i>
       </button>
-      <div className='slider__img-wrapper'>
+      <section className='slider__img-wrapper'>
         <img src={images[currentImageIndex]} alt='' className='slider__img' />
         <p className='slider__counter'>
           {currentImageIndex + 1} of {images.length}
         </p>
-      </div>
+      </section>
       <button
         onClick={nextSlideHandler}
         className='slider__btn slider__btn-next'
       >
         <i className='fas fa-arrow-circle-right'></i>
       </button>
-    </div>
+    </section>
   );
 };

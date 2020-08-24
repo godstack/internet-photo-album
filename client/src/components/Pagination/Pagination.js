@@ -48,11 +48,11 @@ export const Pagination = ({ currentPage, pagesCount, setPage }) => {
   };
 
   return (
-    <div
+    <section
       className='pagination-wrapper'
       style={pagesCount < 2 ? { display: 'none' } : null}
     >
-      <div className='pagination'>
+      <section className='pagination'>
         <button
           className='pagination__btn'
           onClick={previousPageHandler}
@@ -78,14 +78,14 @@ export const Pagination = ({ currentPage, pagesCount, setPage }) => {
             <i className='fas fa-minus'></i>
           )}
         </button>
-      </div>
-      <div className='pagination__current'>
+      </section>
+      <section className='pagination__current'>
         <span className='pagination__text'>Write page to go:</span>
         <input
           className='pagination__input'
           onKeyPress={handleCurrentPageChange}
         />
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };

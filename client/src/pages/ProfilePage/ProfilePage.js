@@ -105,11 +105,11 @@ export const ProfilePage = props => {
   }
 
   return (
-    <div className='profile-page'>
+    <section className='profile-page'>
       <header className='profile-page__header'>
-        <div className='profile-info__img'>
+        <section className='profile-info__img'>
           <ProfileImage photo={user.profilePhoto} />
-        </div>
+        </section>
         <h2 className='profile-info__nickname'>{user?.nickname}</h2>
         <div className='profile-info__follow-btn'>{showFollowButton()}</div>
 
@@ -132,19 +132,19 @@ export const ProfilePage = props => {
         </div>
       </header>
 
-      <div className='profile-posts'>
+      <section className='profile-posts'>
         {posts.map(post => (
           <Post post={post} key={post._id} />
         ))}
-      </div>
+      </section>
 
-      <div className='profile__pagination'>
+      <section className='profile__pagination'>
         <Pagination
           currentPage={page}
           pagesCount={pagesCount}
           setPage={setPage}
         />
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };

@@ -9,8 +9,8 @@ export const FileInput = ({
   filename
 }) => {
   return (
-    <div className='file-input'>
-      <div className='grey-input'>
+    <section className='file-input'>
+      <section className='grey-input'>
         <div className='form-group'>
           <label className='label'>
             <i className='fas fa-paperclip'></i>
@@ -26,7 +26,7 @@ export const FileInput = ({
             Selected file: {filename || "You haven't selected a file yet"}
           </p>
         </div>
-      </div>
+      </section>
 
       <button
         className='btn btn-add'
@@ -35,6 +35,6 @@ export const FileInput = ({
       >
         Upload
       </button>
-    </div>
+    </section>
   );
 };

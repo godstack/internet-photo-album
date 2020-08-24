@@ -41,9 +41,9 @@ export const UserItem = ({ user, request }) => {
   };
 
   return (
-    <div className='user-item'>
+    <section className='user-item'>
       <NavLink to={`/user/${user.nickname}`}>
-        <div className='user-item__wrapper'>
+        <section className='user-item__wrapper'>
           {user.profilePhoto ? (
             <img
               className='user-item__image'
@@ -56,13 +56,13 @@ export const UserItem = ({ user, request }) => {
           ) : (
             <i className='far fa-eye-slash'></i>
           )}
-        </div>
+        </section>
       </NavLink>
       <NavLink to={`/user/${user.nickname}`}>
         <span className='user-item__nickname'>{user.nickname}</span>
       </NavLink>
 
       {showFollowButton()}
-    </div>
+    </section>
   );
 };

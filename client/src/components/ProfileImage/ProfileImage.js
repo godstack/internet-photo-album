@@ -3,7 +3,7 @@ import './ProfileImage.css';
 
 export const ProfileImage = ({ photo }) => {
   return (
-    <div className='profile-image-wrapper'>
+    <section className='profile-image-wrapper'>
       {photo ? (
         <div
           className='profile-image'
@@ -17,6 +17,6 @@ export const ProfileImage = ({ photo }) => {
       ) : (
         <p className='no-photo__p'>No profile photo</p>
       )}
-    </div>
+    </section>
   );
 };

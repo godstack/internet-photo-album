@@ -34,17 +34,17 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className='auth-page'>
+    <section className='auth-page'>
       {loading && <Loader />}
 
-      <div className='form-container'>
-        <div className='form__header'>
+      <section className='form-container'>
+        <header className='form__header'>
           <h3 className='form__type'>Account login</h3>
           <NavLink className='form__redirect' to='/register'>
             Register
           </NavLink>
-        </div>
-        <div className='input-field'>
+        </header>
+        <section className='input-field'>
           <input
             type='text'
             name='email'
@@ -52,9 +52,9 @@ export const LoginPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='email'>Email or Nickname</label>
-        </div>
+        </section>
 
-        <div className='input-field'>
+        <section className='input-field'>
           <input
             type='password'
             name='password'
@@ -62,12 +62,12 @@ export const LoginPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='password'>Password</label>
-        </div>
+        </section>
 
         <button disabled={loading} className='btn-auth' onClick={loginHandler}>
           Login
         </button>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };

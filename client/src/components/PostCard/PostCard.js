@@ -46,11 +46,11 @@ export const PostCard = props => {
   return (
     <>
       {loading && <Loader />}
-      <div className='post-card'>
+      <section className='post-card'>
         <NavLink className='post-card__nickname' to={`/user/${props.postedBy}`}>
           {props.postedBy}
         </NavLink>
-        <div className='post-card__img-wrapper'>
+        <section className='post-card__img-wrapper'>
           <div
             className='post-card__img'
             style={{
@@ -60,8 +60,8 @@ export const PostCard = props => {
               backgroundRepeat: 'no-repeat'
             }}
           ></div>
-        </div>
-        <div className='post-card__additional'>
+        </section>
+        <section className='post-card__additional'>
           <button
             onClick={handleLikePost}
             className='post-card__like'
@@ -78,8 +78,8 @@ export const PostCard = props => {
           <div className='post-card__additional-p'>
             {new Date(post.date).toLocaleDateString()}
           </div>
-        </div>
-      </div>
+        </section>
+      </section>
     </>
   );
 };

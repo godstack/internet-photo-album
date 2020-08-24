@@ -121,9 +121,9 @@ export const SettingsPage = () => {
   }
 
   return (
-    <div className='settings-page'>
-      <div className='settings'>
-        <div className='image-field'>
+    <section className='settings-page'>
+      <section className='settings'>
+        <section className='image-field'>
           <FileInput
             loading={loading}
             uploadHandler={uploadHandler}
@@ -131,9 +131,9 @@ export const SettingsPage = () => {
             title={'New profile image'}
             filename={form?.file?.name}
           />
-        </div>
+        </section>
 
-        <div className='input-field'>
+        <section className='input-field'>
           <input
             type='text'
             name='nickname'
@@ -142,9 +142,9 @@ export const SettingsPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='nickname'>Nickname</label>
-        </div>
+        </section>
 
-        <div className='input-field'>
+        <section className='input-field'>
           <input
             type='text'
             name='email'
@@ -153,7 +153,7 @@ export const SettingsPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='email'>Email</label>
-        </div>
+        </section>
 
         <button
           className='btn settings-btn'
@@ -162,7 +162,7 @@ export const SettingsPage = () => {
         >
           Apply Changes
         </button>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };

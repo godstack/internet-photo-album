@@ -24,9 +24,8 @@
 }
 
 .info-page__map {
-  margin-top: 100px;
-  width: 100vw;
-  height: 100vh;
+  margin: 50px auto;
+  width: 100%;
 }
 
 .info-page__address {
@@ -34,14 +33,11 @@
   width: 300px;
 }
 
-.address__h3 {
+.address__header {
   text-align: center;
 }
-
-.address__ul {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.1rem;
-  color: rgb(68, 68, 68);
+.address_p {
+  font-style: italic;
 }
 
 .info-page__office {
@@ -58,5 +54,10 @@
     font-size: 60px;
 
     line-height: 70px;
+  }
+
+  .info-page__map {
+    margin: 100px auto 50px;
+    width: 70%;
   }
 }

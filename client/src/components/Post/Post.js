@@ -14,7 +14,7 @@ export const Post = props => {
   };
 
   return (
-    <div className='post-wrapper'>
+    <section className='post-wrapper'>
       <div
         className='post'
         onClick={redirectToPostPage}
@@ -25,6 +25,6 @@ export const Post = props => {
           backgroundRepeat: 'no-repeat'
         }}
       ></div>
-    </div>
+    </section>
   );
 };

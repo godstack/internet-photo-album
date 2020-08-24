@@ -36,16 +36,16 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div className='auth-page'>
+    <section className='auth-page'>
       {loading && <Loader />}
-      <div className='form-container'>
-        <div className='form__header'>
+      <section className='form-container'>
+        <header className='form__header'>
           <h3 className='form__type'>Register Account</h3>
           <NavLink className='form__redirect' to='/login'>
             Login
           </NavLink>
-        </div>
-        <div className='input-field'>
+        </header>
+        <section className='input-field'>
           <input
             type='text'
             name='email'
@@ -53,9 +53,9 @@ export const RegisterPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='email'>Email</label>
-        </div>
+        </section>
 
-        <div className='input-field'>
+        <section className='input-field'>
           <input
             type='text'
             name='nickname'
@@ -63,9 +63,9 @@ export const RegisterPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='nickname'>Nickname</label>
-        </div>
+        </section>
 
-        <div className='input-field'>
+        <section className='input-field'>
           <input
             type='password'
             name='password'
@@ -73,7 +73,7 @@ export const RegisterPage = () => {
             onChange={handleChange}
           />
           <label htmlFor='password'>Password</label>
-        </div>
+        </section>
 
         <button
           disabled={loading}
@@ -82,7 +82,7 @@ export const RegisterPage = () => {
         >
           Register
         </button>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
