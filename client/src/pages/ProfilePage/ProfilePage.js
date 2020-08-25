@@ -37,8 +37,6 @@ export const ProfilePage = props => {
   };
 
   const showFollowButton = () => {
-    debugger;
-
     if (auth.user.nickname !== nickname) {
       const isFollowing = !!user.followers.find(el => el === auth.user.userId);
 

@@ -97,7 +97,6 @@ export const SettingsPage = () => {
   }, [message, clearError, error, auth, history]);
 
   const submitChanges = async () => {
-    debugger;
     const data = await request(
       '/api/user/settings/change',
       'PUT',
