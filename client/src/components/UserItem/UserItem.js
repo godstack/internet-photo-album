@@ -4,9 +4,14 @@ import { AuthContext } from '../../context/AuthContext';
 import classNames from 'classnames';
 
 import './UserItem.css';
+import { ProfileImage } from '../ProfileImage/ProfileImage';
 
 export const UserItem = ({ user, request }) => {
   const { login, user: authUser } = useContext(AuthContext);
+
+  const base64data = user.profilePhoto
+    ? Buffer.from(user.profilePhoto, 'binary').toString('base64')
+    : null;
 
   const handleFollow = async () => {
     const data = await request(
@@ -43,8 +48,10 @@ export const UserItem = ({ user, request }) => {
   return (
     <section className='user-item'>
       <NavLink to={`/user/${user.nickname}`}>
-        <section className='user-item__wrapper'>
-          {user.profilePhoto ? (
+        {/* <section className='user-item__wrapper'> */}
+        <ProfileImage photo={base64data} />
+
+        {/* {user.profilePhoto ? (
             <img
               className='user-item__image'
               src={`data:image/jpeg;base64,${Buffer.from(
@@ -55,8 +62,8 @@ export const UserItem = ({ user, request }) => {
             />
           ) : (
             <i className='far fa-eye-slash'></i>
-          )}
-        </section>
+          )} */}
+        {/* </section> */}
       </NavLink>
       <NavLink to={`/user/${user.nickname}`}>
         <span className='user-item__nickname'>{user.nickname}</span>

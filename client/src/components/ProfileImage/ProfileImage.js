@@ -15,7 +15,7 @@ export const ProfileImage = ({ photo }) => {
           }}
         />
       ) : (
-        <p className='no-photo__p'>No profile photo</p>
+        <i className='far fa-eye-slash'></i>
       )}
     </section>
   );

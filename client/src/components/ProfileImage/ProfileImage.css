@@ -11,14 +11,13 @@
   height: 60px;
 }
 
+.profile-image-wrapper i {
+  font-size: 2rem;
+}
+
 .profile-image {
   width: 100%;
   height: 100%;
-}
-
-.no-photo__p {
-  font-size: 0.6rem;
-  text-align: center;
 }
 
 @media screen and (min-width: 500px) {
@@ -29,5 +28,9 @@
 
   .no-photo__p {
     font-size: 1rem;
+  }
+
+  .profile-image-wrapper i {
+    font-size: 4rem;
   }
 }
