@@ -45,7 +45,7 @@ export const InfoPage = () => {
           scrolling='no'
           marginheight='0'
           marginwidth='0'
-          src='https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Vinnytsia,%20Vinnytsia%20Oblast+(Trembola%20office)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed'
+          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Kotsyubyns'koho%20Ave,%2070,%20Vinnytsia,%20Vinnytsia%20Oblast,%2021000+(Trembola)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         ></iframe>
       </section>
     </section>

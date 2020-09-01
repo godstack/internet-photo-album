@@ -37,9 +37,6 @@ router.get('/profile/:nickname', auth, async (req, res) => {
       }
     }
 
-    // const posts = await Post.find({ postedBy: user._id })
-    //   .skip(skip)
-    //   .limit(PAGE_SIZE);
     const count = await Post.find({ postedBy: user._id }).countDocuments();
     let pagesCount = Math.ceil(count / PAGE_SIZE);
 
