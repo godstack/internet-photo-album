@@ -23,9 +23,23 @@ router.get('/profile/:nickname', auth, async (req, res) => {
       return res.status(404).json({ message: 'Such user does not exist' });
     }
 
-    const posts = await Post.find({ postedBy: user._id })
-      .skip(skip)
-      .limit(PAGE_SIZE);
+    const postsFromDB = await (
+      await Post.find({ postedBy: user._id })
+    ).reverse();
+
+    const posts = [];
+
+    for (let i = skip; i < skip + PAGE_SIZE; i++) {
+      if (postsFromDB[i]) {
+        posts.push(postsFromDB[i]);
+      } else {
+        break;
+      }
+    }
+
+    // const posts = await Post.find({ postedBy: user._id })
+    //   .skip(skip)
+    //   .limit(PAGE_SIZE);
     const count = await Post.find({ postedBy: user._id }).countDocuments();
     let pagesCount = Math.ceil(count / PAGE_SIZE);
 
