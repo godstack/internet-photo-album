@@ -39,12 +39,13 @@ export const InfoPage = () => {
 
       <section className='info-page__map'>
         <iframe
+          title='trembola'
           width='100%'
           height='600'
           frameborder='0'
           scrolling='no'
-          marginheight='0'
-          marginwidth='0'
+          marginHeight='0'
+          marginWidth='0'
           src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Kotsyubyns'koho%20Ave,%2070,%20Vinnytsia,%20Vinnytsia%20Oblast,%2021000+(Trembola)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         ></iframe>
       </section>

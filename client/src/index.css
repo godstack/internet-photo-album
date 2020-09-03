@@ -30,7 +30,7 @@ dd {
 
 /* Выставляем основные настройки по-умолчанию для body */
 body {
-  min-height: 100vh;
+  height: 100%;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -170,6 +170,8 @@ input:focus + label {
 .main {
   padding: 100px 20px 30px;
   min-height: 100vh;
+
+  overflow: auto;
   background: rgba(226, 226, 226, 0.2);
   background: linear-gradient(
     45deg,

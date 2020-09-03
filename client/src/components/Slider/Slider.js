@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Slider.css';
 
 export const Slider = props => {
-  const [images, setImages] = useState(props.images);
+  const { images } = props;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextSlideHandler = e => {
