@@ -48,22 +48,7 @@ export const UserItem = ({ user, request }) => {
   return (
     <section className='user-item'>
       <NavLink to={`/user/${user.nickname}`}>
-        {/* <section className='user-item__wrapper'> */}
         <ProfileImage photo={base64data} />
-
-        {/* {user.profilePhoto ? (
-            <img
-              className='user-item__image'
-              src={`data:image/jpeg;base64,${Buffer.from(
-                user.profilePhoto,
-                'binary'
-              ).toString('base64')}`}
-              alt='profile'
-            />
-          ) : (
-            <i className='far fa-eye-slash'></i>
-          )} */}
-        {/* </section> */}
       </NavLink>
       <NavLink to={`/user/${user.nickname}`}>
         <span className='user-item__nickname'>{user.nickname}</span>
